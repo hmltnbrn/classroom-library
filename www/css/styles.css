@@ -1,0 +1,94 @@
+html {
+  font-family: 'Roboto', sans-serif;
+  height: 100%;
+}
+
+body {
+  font-size: 13px;
+  line-height: 20px;
+  margin: 0;
+  background-color: #F5F5F5;
+  height: 100%;
+}
+
+.header {
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+}
+
+.home,
+.checked-out,
+.students,
+.admin {
+  width: 100%;
+  overflow: auto;
+  position: absolute;
+  top: 64px;
+  height: calc(100% - 64px);
+  height: -o-calc(100% - 64px); /* opera */
+  height: -webkit-calc(100% - 64px); /* google, safari */
+  height: -moz-calc(100% - 64px); /* firefox */
+}
+
+.flex {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.paper-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.library-paper {
+  min-height: 100px;
+  width: 300px;
+  margin: 10px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.admin-paper {
+  min-height: 100px;
+  width: 375px;
+  margin: 10px;
+  padding: 30px;
+  display: inline-block;
+}
+
+.students-paper {
+  min-height: 100px;
+  width: 75%;
+  margin: 10px;
+  padding: 10px;
+  display: inline-block;
+}
+
+.title {
+  text-align: center;
+  font-size: 20px;
+}
+
+.update-textfield {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.add-user-textfield {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+a:link,
+a:visited,
+a:hover {
+  color: #00BCD4;
+  text-decoration: none;
+}
