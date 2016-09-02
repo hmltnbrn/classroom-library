@@ -12,7 +12,7 @@ export let findAllBooks = (values) => {
         qs = "?" + qs;
     }
     return request({method: "GET", url: baseURL + "/books" + qs})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let findBookById = (values) => {
@@ -24,12 +24,12 @@ export let findBookById = (values) => {
         });
     }
     return request({method: "GET", url: baseURL + "/books/" + qs})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let findAllBookTitles = () => {
     return request({method: "POST", url: baseURL + "/booktitles"})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let findAllStudents = (values) => {
@@ -41,7 +41,7 @@ export let findAllStudents = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/students", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let findStudentById = (values) => {
@@ -53,7 +53,7 @@ export let findStudentById = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/student", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let checkOutBook = (values) => {
@@ -65,7 +65,7 @@ export let checkOutBook = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/checkout", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let checkInBook = (values) => {
@@ -88,7 +88,7 @@ export let findStudentsByBook = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/checkedout", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let findStudentsByAllBooks = (values) => {
@@ -100,7 +100,7 @@ export let findStudentsByAllBooks = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/checkedoutbooks", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let signIn = (values) => {
@@ -112,17 +112,17 @@ export let signIn = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/signin", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let signOut = () => {
     return request({method: "POST", url: baseURL + "/signout"})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let isSignedIn = () => {
     return request({method: "POST", url: baseURL + "/signed"})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let register = (values) => {
@@ -134,7 +134,7 @@ export let register = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/register", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let changePassword = (values) => {
@@ -146,7 +146,7 @@ export let changePassword = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/changepassword", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let addBook = (values) => {
@@ -158,7 +158,7 @@ export let addBook = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/addbook", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let updateBook = (values) => {
@@ -181,7 +181,7 @@ export let addStudent = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/addstudent", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
-        .then(data => data = JSON.parse(data))
+        .then(data => data = JSON.parse(data));
 }
 
 export let updateStudent = (values) => {

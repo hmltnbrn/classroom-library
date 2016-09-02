@@ -31,6 +31,16 @@ body {
   height: -moz-calc(100% - 64px); /* firefox */
 }
 
+.tab-content {
+  position: absolute;
+  top: 48px;
+  overflow: auto;
+  height: calc(100% - 48px);
+  height: -o-calc(100% - 48px); /* opera */
+  height: -webkit-calc(100% - 48px); /* google, safari */
+  height: -moz-calc(100% - 48px); /* firefox */
+}
+
 .flex {
   justify-content: center;
   align-items: center;

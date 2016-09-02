@@ -84,7 +84,7 @@ class Students extends React.Component {
                 <div className="students">
                     {this.props.signedIn == false ? 
                         <p className="paper-container">Sign in to view this page.</p> :
-                        <Tabs>{studentsByClass}</Tabs>
+                        <Tabs contentContainerClassName="tab-content">{studentsByClass}</Tabs>
                     }
                 </div>
             </MuiThemeProvider>
