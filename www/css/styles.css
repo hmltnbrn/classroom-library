@@ -32,9 +32,10 @@ body {
 }
 
 .tab-content {
+  width: 100%;
+  overflow: auto;
   position: absolute;
   top: 48px;
-  overflow: auto;
   height: calc(100% - 48px);
   height: -o-calc(100% - 48px); /* opera */
   height: -webkit-calc(100% - 48px); /* google, safari */

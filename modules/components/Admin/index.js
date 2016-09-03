@@ -52,40 +52,38 @@ class Admin extends React.Component {
                 <div className="admin">
                     {this.props.adminStatus == false ? 
                         <p className="paper-container">You do not have access to this page.</p> :
-                        <div>
-                            <Tabs>
-                                <Tab label="Users">
-                                    <div className="paper-container">
-                                        <div>
-                                            <AddUser/>
-                                        </div>
-                                        <div>
-                                            <ChangePassword/>
-                                        </div>
+                        <Tabs contentContainerClassName="tab-content">
+                            <Tab label="Users">
+                                <div className="paper-container">
+                                    <div>
+                                        <AddUser/>
                                     </div>
-                                </Tab>
-                                <Tab label="Books">
-                                    <div className="paper-container">
-                                        <div>
-                                            <AddBook findBooks={this.findBooks.bind(this)}/>
-                                        </div>
-                                        <div>
-                                            <UpdateBook books={this.state.books} findBooks={this.findBooks.bind(this)}/>
-                                        </div>
+                                    <div>
+                                        <ChangePassword/>
                                     </div>
-                                </Tab>
-                                <Tab label="Students">
-                                    <div className="paper-container">
-                                        <div>
-                                            <AddStudent findStudents={this.findStudents.bind(this)}/>
-                                        </div>
-                                        <div>
-                                            <UpdateStudent students={this.state.students} findStudents={this.findStudents.bind(this)}/>
-                                        </div>
+                                </div>
+                            </Tab>
+                            <Tab label="Books">
+                                <div className="paper-container">
+                                    <div>
+                                        <AddBook findBooks={this.findBooks.bind(this)}/>
                                     </div>
-                                </Tab>
-                            </Tabs>
-                        </div>
+                                    <div>
+                                        <UpdateBook books={this.state.books} findBooks={this.findBooks.bind(this)}/>
+                                    </div>
+                                </div>
+                            </Tab>
+                            <Tab label="Students">
+                                <div className="paper-container">
+                                    <div>
+                                        <AddStudent findStudents={this.findStudents.bind(this)}/>
+                                    </div>
+                                    <div>
+                                        <UpdateStudent students={this.state.students} findStudents={this.findStudents.bind(this)}/>
+                                    </div>
+                                </div>
+                            </Tab>
+                        </Tabs>
                     }
                 </div>
             </MuiThemeProvider>
