@@ -1,4 +1,4 @@
-# Library Check Out
+# Classroom Library
 
 ![Library Preview](/www/images/preview.png?raw=true "Library Preview")
 

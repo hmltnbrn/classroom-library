@@ -9,5 +9,5 @@ injectTapEventPlugin();
 
 ReactDOM.render(
     <Router routes={routes} history={browserHistory}/>,
-    document.getElementById('main')
+    document.getElementById('app')
 );

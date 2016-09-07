@@ -2,7 +2,9 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import IconButton from 'material-ui/IconButton';
 import AutoComplete from 'material-ui/AutoComplete';
+import Badge from 'material-ui/Badge';
 import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
@@ -140,15 +142,8 @@ class BookListItem extends React.Component {
             textAlign: 'center'
         };
 
-        const totalStyle = {
-            fontSize: 14
-        };
-
-        const avatarStyle = {
-            marginTop: 5,
-            marginBottom: 5,
-            marginLeft: 0,
-            marginRight: 0
+        const badgeIconStyle = {
+            cursor: "default"
         };
 
         const buttonStyle = {
@@ -194,32 +189,26 @@ class BookListItem extends React.Component {
                             </Avatar>
                         </ListItem>
                     </List>
-                    <List className='flex'>
-                        <ListItem
-                            disabled={true}
-                            style={totalStyle}
-                            leftAvatar={
-                                <Avatar
-                                    icon={<Book/>}
-                                    size={30}
-                                    style={avatarStyle} />
-                            }
+                    <div className='flex'>
+                        <Badge
+                            badgeContent={this.state.numberIn}
+                            badgeStyle={{top: 12, right: 12}}
+                            style={{marginRight: 10}}
                         >
-                            <div>{this.state.numberIn}</div>
-                        </ListItem>
-                        <ListItem
-                            disabled={true}
-                            style={totalStyle}
-                            leftAvatar={
-                                <Avatar
-                                    icon={<CheckCircle/>}
-                                    size={30}
-                                    style={avatarStyle} />
-                            }
+                            <IconButton tooltip="Available Books" style={badgeIconStyle}>
+                                <Book color="rgb(188, 188, 188)"/>
+                            </IconButton>
+                        </Badge>
+                        <Badge
+                            badgeContent={this.state.numberOut}
+                            badgeStyle={{top: 12, right: 12}}
+                            style={{marginLeft: 10}}
                         >
-                            <div>{this.state.numberOut}</div>
-                        </ListItem>
-                    </List>
+                            <IconButton tooltip="Checked Out Books" style={badgeIconStyle}>
+                                <CheckCircle color="rgb(188, 188, 188)"/>
+                            </IconButton>
+                        </Badge>
+                    </div>
                 </div>
                 <div className="flex">
                     <FlatButton

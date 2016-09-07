@@ -1,5 +1,5 @@
 {
-  "name": "library-check-out",
+  "name": "classroom-library",
   "version": "1.0.0",
   "description": "Organize library books with a simple check-out/check-in system.",
   "main": "server.js",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/hmltnbrn/library-check-out"
+    "url": "https://github.com/hmltnbrn/classroom-library"
   },
   "author": "Brian Hamilton",
   "bugs": {
-    "url": "https://github.com/hmltnbrn/library-check-out/issues"
+    "url": "https://github.com/hmltnbrn/classroom-library/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/hmltnbrn/library-check-out",
+  "homepage": "https://github.com/hmltnbrn/classroom-library",
   "dependencies": {
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",

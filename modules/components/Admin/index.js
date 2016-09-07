@@ -46,13 +46,28 @@ class Admin extends React.Component {
     }
     
     render() {
+
+        const tabStyle = {
+            position: 'fixed',
+            zIndex: 9
+        };
+
+        const inkStyle = {
+            position: 'fixed',
+            zIndex: 9,
+            top: 112
+        };
         
         return (
             <MuiThemeProvider>
                 <div className="admin">
                     {this.props.adminStatus == false ? 
                         <p className="paper-container">You do not have access to this page.</p> :
-                        <Tabs contentContainerClassName="tab-content">
+                        <Tabs
+                            className="tab-container"
+                            contentContainerClassName="tab-content"
+                            tabItemContainerStyle={tabStyle}
+                            inkBarStyle={inkStyle}>
                             <Tab label="Users">
                                 <div className="paper-container">
                                     <div>

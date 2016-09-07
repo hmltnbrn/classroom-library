@@ -42,7 +42,18 @@ class Students extends React.Component {
             overflowX: "auto",
             overflowY: "hidden",
             textOverflow: "initial"
-        }
+        };
+
+        const tabStyle = {
+            position: 'fixed',
+            zIndex: 9
+        };
+
+        const inkStyle = {
+            position: 'fixed',
+            zIndex: 9,
+            top: 112
+        };
 
         let studentsByClass = mapObject(this.state.students, function (key, value) {
             let listStudents = value.map(student => (
@@ -84,7 +95,13 @@ class Students extends React.Component {
                 <div className="students">
                     {this.props.signedIn == false ? 
                         <p className="paper-container">Sign in to view this page.</p> :
-                        <Tabs contentContainerClassName="tab-content">{studentsByClass}</Tabs>
+                        <Tabs
+                            className="tab-container"
+                            contentContainerClassName="tab-content"
+                            tabItemContainerStyle={tabStyle}
+                            inkBarStyle={inkStyle}>
+                            {studentsByClass}
+                        </Tabs>
                     }
                 </div>
             </MuiThemeProvider>
