@@ -2,7 +2,7 @@
 
 ![Library Preview](/www/images/preview.png?raw=true "Library Preview")
 
-Play around with a test version on [Heroku](https://classroomlibrary.herokuapp.com/)!
+Play around with a test version on [Heroku](https://classroomlibrary.herokuapp.com/)! Default usernames and passwords are listed below.
 
 [Node.js](https://nodejs.org/en/) app using [Express](https://expressjs.com/), [Webpack](https://webpack.github.io/), [React](https://facebook.github.io/react/), [React Router](https://github.com/reactjs/react-router), [Passport](http://passportjs.org/), [Crypto](https://nodejs.org/api/crypto.html), [Material-UI](http://www.material-ui.com/#/), and a [PostgreSQL](https://www.postgresql.org/) database.
 
