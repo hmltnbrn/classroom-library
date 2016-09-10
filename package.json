@@ -16,7 +16,7 @@
     "url": "https://github.com/hmltnbrn/classroom-library/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/hmltnbrn/classroom-library",
+  "homepage": "https://classroomlibrary.herokuapp.com/",
   "dependencies": {
     "body-parser": "^1.15.2",
     "compression": "^1.6.2",

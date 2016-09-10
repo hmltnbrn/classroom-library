@@ -2,6 +2,8 @@
 
 ![Library Preview](/www/images/preview.png?raw=true "Library Preview")
 
+Play around with a test version on [Heroku](https://classroomlibrary.herokuapp.com/)!
+
 [Node.js](https://nodejs.org/en/) app using [Express](https://expressjs.com/), [Webpack](https://webpack.github.io/), [React](https://facebook.github.io/react/), [React Router](https://github.com/reactjs/react-router), [Passport](http://passportjs.org/), [Crypto](https://nodejs.org/api/crypto.html), [Material-UI](http://www.material-ui.com/#/), and a [PostgreSQL](https://www.postgresql.org/) database.
 
 Credit to ccoenraets and his [beer explorer](https://github.com/ccoenraets/belgian-beer-explorer) for creating the initial front-end and back-end I used to start this project.
@@ -14,7 +16,7 @@ Credit to ccoenraets and his [beer explorer](https://github.com/ccoenraets/belgi
 
 3. Clone the repository or download the zip file for this project.
 
-4. Open **database/database.sql** and change **{{put file path here}}/database/books.csv** to include the actual path. Import the **database.sql** file to the database. All tables should be created with dummy data.
+4. Either open **database/database.sql** and import the contents to the database or just import the SQL file itself. All tables should be created with dummy data. A CSV file for the books table is included for reference.
 
 5. Use terminal/cmd/powershell/something similar to navigate to the directory with the files and type the command below. This will automatically install all dependencies listed in the **package.json** file.
 
@@ -22,7 +24,7 @@ Credit to ccoenraets and his [beer explorer](https://github.com/ccoenraets/belgi
     npm install
     ```
 
-6. Open **server/config.js** and edit the databaseURL to be accurate.
+6. Open **server/config.js** and edit the databaseURL to be accurate. If using Heroku, add **?ssl=true** to the end of URL.
 
 7. Type and run the command below to build the Webpack files:
 

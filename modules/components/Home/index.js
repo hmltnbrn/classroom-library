@@ -68,9 +68,12 @@ class Home extends React.Component {
                 <div className="home">
                     <div className="flex flex-column">
                         <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)} hintText={"Enter a partial title, author, or genre"}/>
-                        <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)}/>
+                        <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={true}/>
                     </div>
                     <BookList books={this.state.books} students={this.state.students} total={this.state.total} signedIn={this.props.signedIn} onSearchKeyChange={this.searchKeyChangeHandler.bind(this)}/>
+                    <div className="flex">
+                        <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={false}/>
+                    </div>
                 </div>
             </MuiThemeProvider>
         );

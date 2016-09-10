@@ -65,10 +65,13 @@ class CheckedOut extends React.Component {
                 <div className="checked-out">
                     <div className="flex flex-column">
                         <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)} hintText={this.props.signedIn == true ? "Enter a partial title or student name" : "Enter a partial title"}/>
-                        <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)}/>
+                        <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={true}/>
                     </div>
                     <div className="paper-container">
                         {listBooks}
+                    </div>
+                    <div className="flex">
+                        <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={false}/>
                     </div>
                 </div>
             </MuiThemeProvider>

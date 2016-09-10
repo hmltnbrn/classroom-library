@@ -6,6 +6,7 @@ import ArrowBack from 'material-ui/svg-icons/navigation/arrow-back';
 class Paginator extends React.Component {
 
     render() {
+
         let pages = Math.ceil(this.props.total/this.props.pageSize);
         let page = pages > 0 ? this.props.page + "/" + pages : "0/0";
         
@@ -24,7 +25,7 @@ class Paginator extends React.Component {
                     </IconButton>
                 </div>
                 <div>
-                    <span>{this.props.total} books • page {page}</span>
+                    {this.props.showTotals == true ? <span>{this.props.total} books • page {page}</span> : <span></span>}
                 </div>
             </div>
         );
