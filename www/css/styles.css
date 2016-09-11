@@ -37,7 +37,8 @@ body {
 .home,
 .checked-out,
 .students,
-.admin {
+.admin,
+.not-found {
   width: 100%;
   overflow: auto;
   padding-top: 64px;
@@ -60,6 +61,15 @@ body {
   height: 1px;
   width: 60%;
   background-color: black;
+}
+
+.error-404 {
+  width: 100%;
+  text-align: center;
+  margin: 0;
+  padding-top: 100px;
+  font-size: 30px;
+  font-family: 'Roboto Mono', monospace;
 }
 
 .tab-container {

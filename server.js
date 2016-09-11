@@ -19,34 +19,10 @@ app.use(compression());
 
 app.use('/', express.static(__dirname + '/www'));
 
-app.get(['/', '/out', '/students', '/admin'], function (req, res) { //react router routes
-  res.sendFile(path.join(__dirname, 'www', 'index.html'))
-});
-
-// Adding CORS support
-app.all('*', function (req, res, next) { //posts and gets
-    if (req.method === 'OPTIONS') {
-        // Set CORS headers: allow all origins, methods, and headers
-        res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Methods", "GET, POST");
-        res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
-        res.header('Access-Control-Allow-Credentials', true);
-
-        // CORS Preflight
-        res.send();
-
-    }
-
-    else {
-        next();
-    }
-
-});
-
 app.use(cookieParser('librarian'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+    extended: true
 }));
 app.set('trust proxy', 1);
 app.use(session({
@@ -56,6 +32,11 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+
+//Handle 500 error
+app.use(function(err, req, res, next) {
+    res.status(500).send('500: Internal Server Error');
+});
 
 function createHash(string) { //creates a hash passed on a password
     return crypto.createHash('sha256').update(string).digest('hex');
@@ -133,6 +114,10 @@ app.post('/signout', function (req, res, next){
 
 app.post('/signed', isLoggedIn, function (req, res, next) {
     return res.json({status: true, admin: req.user.admin, username: req.user.username});
+});
+
+app.get('*', function (req, res, next) {
+    res.sendFile(path.join(__dirname, 'www', 'index.html'));
 });
 
 app.listen(app.get('port'), function () {

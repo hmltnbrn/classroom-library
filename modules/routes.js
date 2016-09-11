@@ -6,6 +6,7 @@ import Home from './components/Home';
 import CheckedOut from './components/CheckedOut';
 import Students from './components/Students';
 import Admin from './components/Admin';
+import NotFound from './components/NotFound';
 
 module.exports = (
     <Route path="/" component={App}>
@@ -13,5 +14,6 @@ module.exports = (
         <Route path="/out" component={CheckedOut}/>
         <Route path="/students" component={Students}/>
         <Route path="/admin" component={Admin}/>
+        <Route path="*" component={NotFound}/>
     </Route>
 );

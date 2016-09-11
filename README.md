@@ -2,7 +2,7 @@
 
 ![Library Preview](/www/images/preview.png?raw=true "Library Preview")
 
-Play around with a test version on [Heroku](https://classroomlibrary.herokuapp.com/)! Default usernames and passwords are listed below.
+Play around with an example version on [Heroku](https://classroomlibrary.herokuapp.com/)! Default usernames and passwords are listed below.
 
 [Node.js](https://nodejs.org/en/) app using [Express](https://expressjs.com/), [Webpack](https://webpack.github.io/), [React](https://facebook.github.io/react/), [React Router](https://github.com/reactjs/react-router), [Passport](http://passportjs.org/), [Crypto](https://nodejs.org/api/crypto.html), [Material-UI](http://www.material-ui.com/#/), and a [PostgreSQL](https://www.postgresql.org/) database.
 
@@ -60,3 +60,7 @@ Use the [admin](http://localhost:8080/admin) page to change passwords and add ne
 5. It's designed to always require a sign in to see student's names and to check out/in books.
 
 6. Signing in creates a browser session, allowing for refreshing the page and remaining signed in. Restart the server to reinitialize it.
+
+---
+
+Feel free to use this as a stepping stone for learning React or as a base for something else! Let me know if there are any issues or if you have any questions.
