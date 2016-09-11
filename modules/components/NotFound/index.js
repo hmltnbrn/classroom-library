@@ -13,6 +13,7 @@ class NotFound extends React.Component {
             <MuiThemeProvider>
                 <div className="not-found">
                     <p className="error-404">404: Page Not Found</p>
+                    <img src="images/squidward_frown.png" className="error-404-img" alt="Awwwww"/>
                 </div>
             </MuiThemeProvider>
         );

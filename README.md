@@ -63,4 +63,4 @@ Use the [admin](http://localhost:8080/admin) page to change passwords and add ne
 
 ---
 
-Feel free to use this as a stepping stone for learning React or as a base for something else! Let me know if there are any issues or if you have any questions.
+Feel free to use this as a stepping stone for learning React or as a base for something else. Let me know if there are any issues or if you have any questions.

@@ -58881,7 +58881,8 @@
 	                        'p',
 	                        { className: 'error-404' },
 	                        '404: Page Not Found'
-	                    )
+	                    ),
+	                    _react2.default.createElement('img', { src: 'images/squidward_frown.png', className: 'error-404-img', alt: 'Awwwww' })
 	                )
 	            );
 	        }

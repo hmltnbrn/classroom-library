@@ -68,8 +68,14 @@ body {
   text-align: center;
   margin: 0;
   padding-top: 100px;
+  padding-bottom: 20px;
   font-size: 30px;
   font-family: 'Roboto Mono', monospace;
+}
+
+.error-404-img {
+  display: block;
+  margin: auto;
 }
 
 .tab-container {
