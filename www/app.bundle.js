@@ -47821,7 +47821,7 @@
 	                        'Built by ',
 	                        _react2.default.createElement(
 	                            'a',
-	                            { href: 'https://github.com/hmltnbrn', target: '_blank' },
+	                            { href: 'http://www.brianhamilton.me', target: '_blank' },
 	                            'Brian Hamilton'
 	                        ),
 	                        ' with ',

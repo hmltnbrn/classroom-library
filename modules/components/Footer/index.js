@@ -10,7 +10,7 @@ class Footer extends React.Component {
                 <div className="footer">
                     <div className="horiz-rule"></div>
                     <div>
-                        Built by <a href="https://github.com/hmltnbrn" target="_blank">Brian Hamilton</a> with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="http://facebook.github.io/react/" target="_blank">React</a>
+                        Built by <a href="http://www.brianhamilton.me" target="_blank">Brian Hamilton</a> with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="http://facebook.github.io/react/" target="_blank">React</a>
                     </div>
                     <div>
                         View source code on <a href="https://github.com/hmltnbrn/library-check-out" target="_blank">GitHub</a>
