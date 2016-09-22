@@ -42,8 +42,8 @@ Credit to ccoenraets and his [beer explorer](https://github.com/ccoenraets/belgi
 
 ## Initial Users/Passwords
 
-1. admin/password (includes access to [admin](http://localhost:8080/admin) page)
-2. librarian/password
+1. Teacher/password (includes access to [admin](http://localhost:8080/admin) page)
+2. Librarian/password
 
 Use the [admin](http://localhost:8080/admin) page to change passwords and add new users.
 

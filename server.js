@@ -38,9 +38,7 @@ app.use(function(err, req, res, next) {
     res.status(500).send('500: Internal Server Error');
 });
 
-function createHash(string) { //creates a hash passed on a password
-    return crypto.createHash('sha256').update(string).digest('hex');
-}
+let createHash = (string) => crypto.createHash('sha256').update(string).digest('hex'); //hashes password
 
 passport.use(new LocalStrategy( //passport local strategy
     (username, password, done) => {

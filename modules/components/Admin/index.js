@@ -61,7 +61,7 @@ class Admin extends React.Component {
         return (
             <MuiThemeProvider>
                 <div className="admin">
-                    {this.props.adminStatus == false ? 
+                    {this.props.adminStatus === false ? 
                         <p className="paper-container">You do not have access to this page.</p> :
                         <Tabs
                             className="tab-container"

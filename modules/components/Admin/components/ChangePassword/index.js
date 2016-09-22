@@ -35,33 +35,44 @@ class ChangePassword extends React.Component {
     }
 
     handleKeyDown(event) {
-        if (event.keyCode == 13)
+        if (event.keyCode === 13)
             this.openDialog();
     }
 
     openDialog() {
 
-        this.state.user == "" ? this.setState({userStatus: "Required field"}) : this.setState({userStatus: false});
+        this.state.user === "" ? this.setState({userStatus: "Required field"}) : this.setState({userStatus: false});
 
-        if (this.state.pass == "" && this.state.passConf == "") {
+        if (this.state.pass === "" && this.state.passConf === "") {
             this.setState({passStatus: "Required field"});
         }
-        else if (this.state.pass != this.state.passConf) {
+        else if (this.state.pass !== this.state.passConf) {
             this.setState({passStatus: "Passwords do not match"})
         }
         else {
             this.setState({passStatus: false});
         }
 
-        if (this.state.user != "" && this.state.pass != "" && this.state.passConf != "" && this.state.pass == this.state.passConf) {
-            this.setState({changePassOpen: true, userStatus: false, passStatus: false});
+        if (this.state.user !== "" && this.state.pass !== "" && this.state.passConf !== "" && this.state.pass === this.state.passConf) {
+            this.setState({
+                changePassOpen: true,
+                userStatus: false,
+                passStatus: false
+            });
         }
         
     }
 
     handleRegister() {
-        if (this.state.userStatus == false) {
-            this.setState({user: "", pass: "", passConf: "", userStatus: false, passStatus: false, snackOpen: true}, this.closeDialog);
+        if (this.state.userStatus === false) {
+            this.setState({
+                user: "",
+                pass: "",
+                passConf: "",
+                userStatus: false,
+                passStatus: false,
+                snackOpen: true
+            }, this.closeDialog);
         }
         else {
             this.closeDialog();
@@ -75,12 +86,21 @@ class ChangePassword extends React.Component {
     changePassword() {
         libraryService.changePassword({username: this.state.user, password: this.state.pass})
             .then(data => {
-                this.setState({userStatus: data.status, passStatus: false}, this.handleRegister)
+                this.setState({
+                    userStatus: data.status,
+                    passStatus: false
+                }, this.handleRegister)
             });
     }
 
     handleClear() {
-        this.setState({user: "", pass: "", passConf: "", userStatus: false, passStatus: false});
+        this.setState({
+            user: "",
+            pass: "",
+            passConf: "",
+            userStatus: false,
+            passStatus: false
+        });
     }
 
     closeSnackbar() {

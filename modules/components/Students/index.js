@@ -32,7 +32,7 @@ class Students extends React.Component {
     
     render() {
 
-        function mapObject(object, callback) {
+        let mapObject = (object, callback) => {
             return Object.keys(object).map(function (key) {
                 return callback(key, object[key]);
             });
@@ -93,7 +93,7 @@ class Students extends React.Component {
         return (
             <MuiThemeProvider>
                 <div className="students">
-                    {this.props.signedIn == false ? 
+                    {this.props.signedIn === false ? 
                         <p className="paper-container">Sign in to view this page.</p> :
                         <Tabs
                             className="tab-container"

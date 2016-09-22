@@ -35,15 +35,11 @@ class UpdateStudent extends React.Component {
     }
 
     handleUpdateInput(value) {
-        this.setState({
-            studentId: value.id
-        });
+        this.setState({studentId: value.id});
     }
 
     handleNewRequest(value) {
-        this.setState({
-            studentId: value.id
-        });
+        this.setState({studentId: value.id});
     }
 
     handleNameChange(event) {
@@ -59,7 +55,7 @@ class UpdateStudent extends React.Component {
     }
 
     handleKeyDown(event) {
-        if (event.keyCode == 13)
+        if (event.keyCode === 13)
             this.handleUpdateStudent();
     }
 
@@ -73,19 +69,33 @@ class UpdateStudent extends React.Component {
     }
 
     updateStudent() {
-        var that = this;
         libraryService.updateStudent({name: this.state.name, class: this.state.class, active: this.state.active, studentId: this.state.studentId})
-            .then(function() {that.handleAfterInsert()});
+            .then(() => {
+                this.handleAfterInsert()
+            });
     }
 
     handleAfterInsert() {
         this.refs["autocomplete"].setState({searchText: ""});
-        this.setState({name: "", class: "", active: false, studentId: null, snackOpen: true}, this.props.findStudents());
+        this.setState({
+            name: "",
+            class: "",
+            active: false,
+            studentId: null,
+            snackOpen: true
+        }, this.props.findStudents);
     }
 
     handleClear() {
         this.refs["autocomplete"].setState({searchText: ""});
-        this.setState({name: "", class: "", active: false, nameStatus: false, classStatus: false, studentId: null});
+        this.setState({
+            name: "",
+            class: "",
+            active: false,
+            nameStatus: false,
+            classStatus: false,
+            studentId: null
+        });
     }
 
     closeSnackbar() {

@@ -46,7 +46,7 @@ class AddBook extends React.Component {
     }
 
     handleKeyDown(event) {
-        if (event.keyCode == 13)
+        if (event.keyCode === 13)
             this.handleAddBook();
     }
 
@@ -55,18 +55,18 @@ class AddBook extends React.Component {
         this.state.author === "" ? this.setState({authorStatus: "Required field"}) : this.setState({authorStatus: false});
         this.state.genre === "" ? this.setState({genreStatus: "Required field"}) : this.setState({genreStatus: false});
         this.state.level === "" ? this.setState({levelStatus: "Required field"}) : this.setState({levelStatus: false});
-        
-        if(Number.isInteger(parseInt(this.state.numberIn)) === false) {
-            this.setState({numberInStatus: "Not a number"});
+
+        if(this.state.numberIn === "") {
+            this.setState({numberInStatus: "Required field"});
         }
-        else if (parseInt(this.state.numberIn) === 0) {
-            this.setState({numberInStatus: "Cannot be zero"});
+        else if (this.state.numberIn <= 0) {
+            this.setState({numberInStatus: "Cannot be zero or negative"});
         }
         else {
             this.setState({numberInStatus: false});
         }
 
-        if (this.state.title !== "" && this.state.author !== "" && this.state.genre !== "" && this.state.level !== "" && this.state.numberIn !== "" && Number.isInteger(parseInt(this.state.numberIn)) === true && parseInt(this.state.numberIn) !== 0) {
+        if (this.state.title !== "" && this.state.author !== "" && this.state.genre !== "" && this.state.level !== "" && this.state.numberIn > 0) {
             this.addBook();
         }
     }
@@ -74,18 +74,42 @@ class AddBook extends React.Component {
     addBook() {
         libraryService.addBook({title: this.state.title, author: this.state.author, genre: this.state.genre, level: this.state.level, numberIn: this.state.numberIn})
             .then(data => {
-                this.setState({titleStatus: data.status, authorStatus: false, genreStatus: false, levelStatus: false, numberInStatus: false}, this.handleAfterInsert)
+                this.setState({
+                    titleStatus: data.status,
+                    authorStatus: false,
+                    genreStatus: false,
+                    levelStatus: false,
+                    numberInStatus: false
+                }, this.handleAfterInsert)
             });
     }
 
     handleAfterInsert() {
-        if (this.state.titleStatus == false) {
-            this.setState({title: "", author: "", genre: "", level: "", numberIn: "", snackOpen: true}, this.props.findBooks());
+        if (this.state.titleStatus === false) {
+            this.setState({
+                title: "",
+                author: "",
+                genre: "",
+                level: "",
+                numberIn: "",
+                snackOpen: true
+            }, this.props.findBooks);
         }
     }
 
     handleClear() {
-        this.setState({title: "", author: "", genre: "", level: "", numberIn: "", titleStatus: false, authorStatus: false, genreStatus: false, levelStatus: false, numberInStatus: false});
+        this.setState({
+            title: "",
+            author: "",
+            genre: "",
+            level: "",
+            numberIn: "",
+            titleStatus: false,
+            authorStatus: false,
+            genreStatus: false,
+            levelStatus: false,
+            numberInStatus: false
+        });
     }
 
     closeSnackbar() {

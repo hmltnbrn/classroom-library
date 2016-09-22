@@ -71,7 +71,11 @@ let findAllStudents = (req, res, next) => { //finds all students
         sql = "SELECT * FROM students WHERE active IS TRUE ORDER BY SUBSTRING(name, '([^[:space:]]+)(?:,|$)')";
     }
     else if (active == "only active + total") { //get active students plus how many books they have/what books they have
-        sql = "SELECT s.id, s.class, s.name, CASE WHEN (SELECT COUNT(*) FROM checked_out c WHERE c.date_in IS NULL) = 0 THEN 0 ELSE (SELECT COUNT(*) FROM checked_out c WHERE s.id = c.student_id AND c.date_in IS NULL) END AS total_out, ARRAY(SELECT DISTINCT b.title FROM books b, checked_out c WHERE s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL) AS books_out FROM students s GROUP BY s.name, s.class, s.id ORDER BY s.class, SUBSTRING(s.name, '([^[:space:]]+)(?:,|$)')";
+        sql = "SELECT s.id, s.class, s.name, " +
+                "CASE WHEN (SELECT COUNT(*) FROM checked_out c WHERE c.date_in IS NULL) = 0 " +
+                "THEN 0 ELSE (SELECT COUNT(*) FROM checked_out c WHERE s.id = c.student_id AND c.date_in IS NULL) END AS total_out, " +
+                "ARRAY(SELECT DISTINCT b.title FROM books b, checked_out c WHERE s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL) AS books_out " +
+                "FROM students s GROUP BY s.name, s.class, s.id ORDER BY s.class, SUBSTRING(s.name, '([^[:space:]]+)(?:,|$)')";
     }
     else { //gets all students regardless of active status
         sql = "SELECT * FROM students ORDER BY SUBSTRING(name, '([^[:space:]]+)(?:,|$)')";
@@ -91,7 +95,9 @@ let findStudentById = (req, res, next) => { //gets student info based on ID
 };
 
 let findStudentsByBook = (req, res, next) => { //gets student info based on if they have a book ID checked out
-    let sql = "SELECT s.id, s.name FROM students s, checked_out c WHERE s.id = c.student_id AND c.date_in IS NULL AND c.book_id = $1 GROUP BY s.id, s.name ORDER BY SUBSTRING(name, '([^[:space:]]+)(?:,|$)')";
+    let sql = "SELECT s.id, s.name FROM students s, checked_out c " +
+                "WHERE s.id = c.student_id AND c.date_in IS NULL AND c.book_id = $1 " +
+                "GROUP BY s.id, s.name ORDER BY SUBSTRING(name, '([^[:space:]]+)(?:,|$)')";
 
     db.query(sql, [parseInt(req.body.bookId)])
         .then(studentsByBook => res.json({studentsByBook}))
@@ -103,13 +109,13 @@ let findStudentsByAllBooks = (req, res, next) => { //gets books that are checked
     let pageSize = req.body.pageSize ? parseInt(req.body.pageSize) : 12,
         page = req.body.page ? parseInt(req.body.page) : 1,
         search = req.body.search,
-        signedIn = req.body.signedIn,
+        signedIn = (req.body.signedIn === 'true'),
         whereParts = [],
         values = [];
 
     if (search) {
         values.push(escape(search));
-        if (signedIn == 'true') {
+        if (signedIn === true) {
             whereParts.push("b.title || s.name ~* $" + values.length + " AND");
 
         }
@@ -121,10 +127,14 @@ let findStudentsByAllBooks = (req, res, next) => { //gets books that are checked
     let where = whereParts.length > 0 ? ("WHERE " + whereParts.join(" AND ")) : "WHERE ";
 
 
-    let countSql = "SELECT COUNT(DISTINCT b.title) from books b, students s, checked_out c " + where + 
-    " s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL";
+    let countSql = "SELECT COUNT(DISTINCT b.title) from books b, students s, checked_out c " + where +
+                    " s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL";
 
-    let sql = "SELECT c.book_id, b.title, ARRAY(SELECT s2.name FROM books b2, students s2, checked_out c2 WHERE s2.id = c2.student_id AND c2.book_id = c.book_id GROUP BY s2.name ORDER BY SUBSTRING(s2.name, '([^[:space:]]+)(?:,|$)')) AS students FROM books b, students s, checked_out c " + where + " s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL GROUP BY c.book_id, b.title ORDER BY b.title LIMIT $" + (values.length + 1) + " OFFSET $" + (values.length + 2);
+    let sql = "SELECT c.book_id, b.title, ARRAY(SELECT s2.name FROM books b2, students s2, checked_out c2 " +
+                "WHERE s2.id = c2.student_id AND c2.book_id = c.book_id AND c2.date_in IS NULL GROUP BY s2.name " +
+                "ORDER BY SUBSTRING(s2.name, '([^[:space:]]+)(?:,|$)')) AS students FROM books b, students s, checked_out c " + where +
+                " s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL GROUP BY c.book_id, b.title ORDER BY b.title " +
+                "LIMIT $" + (values.length + 1) + " OFFSET $" + (values.length + 2);
 
     db.query(countSql, values)
         .then(result => {
@@ -146,14 +156,14 @@ let checkOutBook = (req, res, next) => { //checks out a book
 
     db.query(sql1, [parseInt(req.body.bookId), parseInt(req.body.studentId)])
         .then(result => {
-            if(result.length != 0) {
+            if(result.length !== 0) {
                 return res.json({"status": "Already has book"}); //returns if the student already has the book
             }
             else {
                 db.query(sql2, [parseInt(req.body.bookId), parseInt(req.body.studentId), new Date()])
-                    .then(function() {
+                    .then(() => {
                         db.query(sql3, [parseInt(req.body.numberIn), parseInt(req.body.numberOut), parseInt(req.body.bookId)])
-                            .then(function() {
+                            .then(() => {
                                 return res.json({"status": false})
                             })
                             .catch(next);
@@ -171,7 +181,7 @@ let checkInBook = (req, res, next) => { //checks in a book
     let sql2 = "UPDATE books SET number_in = $1, number_out = $2 WHERE id = $3";
 
     db.query(sql1, [new Date(), parseInt(req.body.bookId), parseInt(req.body.studentId)])
-        .then(function() {
+        .then(() => {
             db.query(sql2, [parseInt(req.body.numberIn), parseInt(req.body.numberOut), parseInt(req.body.bookId)])
                 .then(res.redirect('back'))
                 .catch(next);
@@ -189,12 +199,12 @@ let register = (req, res, next) => { //creates new users
 
     db.query(sql1, [req.body.username])
         .then(result => {
-            if(result.length != 0) {
+            if(result.length !== 0) {
                 return res.json({"status": "Username already taken"}); //returns if the username is already taken
             }
             else {
                 db.query(sql2, [req.body.username, hashedPassword, salt, req.body.admin])
-                    .then(function() {
+                    .then(() => {
                         return res.json({"status": false})
                     })
                     .catch(next);
@@ -213,12 +223,12 @@ let changePassword = (req, res, next) => { //changes password for a user
 
     db.query(sql1, [req.body.username])
         .then(result => {
-            if(result.length == 0) {
+            if(result.length === 0) {
                 return res.json({"status": "Username doesn't exist"}); //returns if the username doesn't exist
             }
             else {
                 db.query(sql2, [hashedPassword, salt, req.body.username])
-                    .then(function() {
+                    .then(() => {
                         return res.json({"status": false})
                     })
                     .catch(next);
@@ -234,12 +244,12 @@ let addBook = (req, res, next) => { //add book
 
     db.query(sql1, [req.body.title])
         .then(result => {
-            if(result.length != 0) {
+            if(result.length !== 0) {
                 return res.json({"status": "Book already exists"}); //returns if book already exists
             }
             else {
                 db.query(sql2, [req.body.title, req.body.author, req.body.genre, req.body.level, parseInt(req.body.numberIn), 0])
-                    .then(function() {
+                    .then(() => {
                         return res.json({"status": false})
                     })
                     .catch(next);
@@ -264,12 +274,12 @@ let addStudent = (req, res, next) => { //adds a student
 
     db.query(sql1, [req.body.name, req.body.class])
         .then(result => {
-            if(result.length != 0) {
+            if(result.length !== 0) {
                 return res.json({"status": "Student already exists"}); //returns if student already exists
             }
             else {
                 db.query(sql2, [req.body.name, req.body.class])
-                    .then(function() {
+                    .then(() => {
                         return res.json({"status": false})
                     })
                     .catch(next);

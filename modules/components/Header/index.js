@@ -40,16 +40,25 @@ class Header extends React.Component {
     }
 
     handleKeyDown(event) {
-        if (event.keyCode == 13)
+        if (event.keyCode === 13)
             this.signIn();
     }
 
     openDialog() {
-        this.setState({signInOpen: true, user: "", pass: ""});
+        this.setState({
+            signInOpen: true,
+            user: "",
+            pass: ""
+        });
     }
 
     closeDialog() {
-        this.setState({signInOpen: false, user: "", pass: "", status: false});
+        this.setState({
+            signInOpen: false,
+            user: "",
+            pass: "",
+            status: false
+        });
     }
 
     signIn() {
@@ -71,9 +80,12 @@ class Header extends React.Component {
     }
 
     session() {
-        if(this.state.status == false) {
+        if(this.state.status === false) {
             this.props.session();
-            this.setState({signInOpen: false, status: false});
+            this.setState({
+                signInOpen: false,
+                status: false
+            });
         }
     }
 
@@ -128,7 +140,8 @@ class Header extends React.Component {
         };
 
         const separatorStyle = {
-            top: 0
+            top: 0,
+            backgroundColor: white
         };
 
         return (
@@ -142,12 +155,12 @@ class Header extends React.Component {
                             <ToolbarTitle text={this.props.pageTitle} style={titleStyle}/>
                         </ToolbarGroup>
                         <ToolbarGroup lastChild={true} style={rightGroupStyle}>
-                            {this.props.username != "" ? 
-                                <ToolbarTitle text={this.props.username} /> :
+                            {this.props.username !== "" ? 
+                                <ToolbarTitle text={this.props.username} style={{color: white}}/> :
                                 <span></span>
                             }
                             <ToolbarSeparator style={separatorStyle}/>
-                            {this.props.signedIn == false ? 
+                            {this.props.signedIn === false ? 
                                 <FlatButton
                                     label="Sign In"
                                     primary={true}
@@ -194,7 +207,7 @@ class Header extends React.Component {
                             style={menuItemStyle}>
                             Students
                         </MenuItem>
-                        {this.props.adminStatus == true ? 
+                        {this.props.adminStatus === true ? 
                             <MenuItem
                                 onTouchTap={this.handleDrawerClose.bind(this)}
                                 containerElement={<Link to="/admin" activeClassName="active"/>}

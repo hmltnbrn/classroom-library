@@ -38,7 +38,11 @@ class BookListItem extends React.Component {
     }
 
     handleCheckOutClose() {
-        this.setState({checkOutOpen: false, studentId: null, checkOutStatus: false});
+        this.setState({
+            checkOutOpen: false,
+            studentId: null,
+            checkOutStatus: false
+        });
     }
 
     handleCheckOutSubmit() {
@@ -57,23 +61,24 @@ class BookListItem extends React.Component {
     }
 
     handleAfterCheckOut() {
-        if(this.state.checkOutStatus == false) {
+        if(this.state.checkOutStatus === false) {
             let newIn = this.state.numberIn - 1;
             let newOut = this.state.numberOut + 1;
-            this.setState({checkOutOpen: false, studentId: null, numberIn: newIn, numberOut: newOut});
+            this.setState({
+                checkOutOpen: false,
+                studentId: null,
+                numberIn: newIn,
+                numberOut: newOut
+            });
         }
     }
 
     handleUpdateInput(value) {
-        this.setState({
-            studentId: value.id
-        });
+        this.setState({studentId: value.id});
     }
 
     handleNewRequest(value) {
-        this.setState({
-            studentId: value.id
-        });
+        this.setState({studentId: value.id});
     }
 
     findStudentsByBook() {
@@ -90,14 +95,22 @@ class BookListItem extends React.Component {
     }
 
     handleCheckInClose() {
-        this.setState({checkInOpen: false, studentId: null});
+        this.setState({
+            checkInOpen: false,
+            studentId: null
+        });
     }
 
     handleCheckInSubmit() {
         let newIn = this.state.numberIn + 1;
         let newOut = this.state.numberOut - 1;
         this.checkInHandler([this.props.book.id, this.state.studentId, newIn, newOut]);
-        this.setState({checkInOpen: false, studentId: null, numberIn: newIn, numberOut: newOut});
+        this.setState({
+            checkInOpen: false,
+            studentId: null,
+            numberIn: newIn,
+            numberOut: newOut
+        });
     }
 
     checkInHandler(values) {
@@ -113,7 +126,7 @@ class BookListItem extends React.Component {
                 onTouchTap={this.handleCheckOutClose.bind(this)}/>,
             <FlatButton
                 label="Submit"
-                disabled={this.state.studentId == null ? true : false}
+                disabled={this.state.studentId === null ? true : false}
                 primary={true}
                 onTouchTap={this.handleCheckOutSubmit.bind(this)}/>,
         ];
@@ -125,7 +138,7 @@ class BookListItem extends React.Component {
                 onTouchTap={this.handleCheckInClose.bind(this)}/>,
             <FlatButton
                 label="Submit"
-                disabled={this.state.studentId == null ? true : false}
+                disabled={this.state.studentId === null ? true : false}
                 primary={true}
                 onTouchTap={this.handleCheckInSubmit.bind(this)}/>,
         ];
@@ -155,14 +168,8 @@ class BookListItem extends React.Component {
             value: 'id'
         };
 
-        let disabledOut = false;
-        let disabledIn = false;
-
-        if(this.state.numberIn == 0 || this.props.signedIn == false) 
-            disabledOut = true;
-
-        if(this.state.numberOut == 0 || this.props.signedIn == false) 
-            disabledIn = true;
+        let disabledOut = (this.state.numberIn === 0 || this.props.signedIn === false);
+        let disabledIn = (this.state.numberOut === 0 || this.props.signedIn === false);
 
         return (
             <Paper className="library-paper">

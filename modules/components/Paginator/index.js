@@ -25,7 +25,7 @@ class Paginator extends React.Component {
                     </IconButton>
                 </div>
                 <div>
-                    {this.props.showTotals == true ? <span>{this.props.total} books • page {page}</span> : <span></span>}
+                    {this.props.showTotals === true ? <span>{this.props.total} books • page {page}</span> : <span></span>}
                 </div>
             </div>
         );

@@ -41,7 +41,7 @@ class AddUser extends React.Component {
     }
 
     handleKeyDown(event) {
-        if (event.keyCode == 13)
+        if (event.keyCode === 13)
             this.openDialog();
     }
 
@@ -60,14 +60,26 @@ class AddUser extends React.Component {
         }
 
         if (this.state.user !== "" && this.state.pass !== "" && this.state.passConf !== "" && this.state.pass === this.state.passConf) {
-            this.setState({addUserOpen: true, userStatus: false, passStatus: false});
+            this.setState({
+                addUserOpen: true,
+                userStatus: false,
+                passStatus: false
+            });
         }
         
     }
 
     handleRegister() {
-        if (this.state.userStatus == false) {
-            this.setState({user: "", pass: "", passConf: "", admin: "false", userStatus: false, passStatus: false, snackOpen: true}, this.closeDialog);
+        if (this.state.userStatus === false) {
+            this.setState({
+                user: "",
+                pass: "",
+                passConf: "",
+                admin: "false",
+                userStatus: false,
+                passStatus: false,
+                snackOpen: true
+            }, this.closeDialog);
         }
         else {
             this.closeDialog();
@@ -81,12 +93,22 @@ class AddUser extends React.Component {
     addUser() {
         libraryService.register({username: this.state.user, password: this.state.pass, admin: this.state.admin})
             .then(data => {
-                this.setState({userStatus: data.status, passStatus: false}, this.handleRegister)
+                this.setState({
+                    userStatus: data.status,
+                    passStatus: false
+                }, this.handleRegister)
             });
     }
     
     handleClear() {
-        this.setState({user: "", pass: "", passConf: "", admin: "false", userStatus: false, passStatus: false});
+        this.setState({
+            user: "",
+            pass: "",
+            passConf: "",
+            admin: "false",
+            userStatus: false,
+            passStatus: false
+        });
     }
 
     closeSnackbar() {
@@ -179,7 +201,7 @@ class AddUser extends React.Component {
                     open={this.state.addUserOpen}
                     onRequestClose={this.closeDialog.bind(this)}
                 >
-                    Are you sure you want to add user <strong>{this.state.user}</strong> as a <strong>{this.state.admin == 'true' ? "teacher" : "librarian"}</strong>?
+                    Are you sure you want to add user <strong>{this.state.user}</strong> as a <strong>{this.state.admin === 'true' ? "teacher" : "librarian"}</strong>?
                 </Dialog>
                 <Snackbar
                     open={this.state.snackOpen}

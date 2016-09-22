@@ -28,15 +28,15 @@ class AddStudent extends React.Component {
     }
 
     handleKeyDown(event) {
-        if (event.keyCode == 13)
+        if (event.keyCode === 13)
             this.handleAddStudent();
     }
 
     handleAddStudent() {
-        this.state.name == "" ? this.setState({nameStatus: "Required field"}) : this.setState({nameStatus: false});
-        this.state.class == "" ? this.setState({classStatus: "Required field"}) : this.setState({classStatus: false});
+        this.state.name === "" ? this.setState({nameStatus: "Required field"}) : this.setState({nameStatus: false});
+        this.state.class === "" ? this.setState({classStatus: "Required field"}) : this.setState({classStatus: false});
 
-        if (this.state.name != "" && this.state.class != "") {
+        if (this.state.name !== "" && this.state.class !== "") {
             this.addStudent();
         }
     }
@@ -44,18 +44,30 @@ class AddStudent extends React.Component {
     addStudent() {
         libraryService.addStudent({name: this.state.name, class: this.state.class})
             .then(data => {
-                this.setState({nameStatus: data.status, classStatus: false}, this.handleAfterInsert)
+                this.setState({
+                    nameStatus: data.status,
+                    classStatus: false
+                }, this.handleAfterInsert)
             });
     }
 
     handleAfterInsert() {
-        if (this.state.nameStatus == false) {
-            this.setState({name: "", class: "", snackOpen: true}, this.props.findStudents());
+        if (this.state.nameStatus === false) {
+            this.setState({
+                name: "",
+                class: "",
+                snackOpen: true
+            }, this.props.findStudents);
         }
     }
 
     handleClear() {
-        this.setState({name: "", class: "", nameStatus: false, classStatus: false});
+        this.setState({
+            name: "",
+            class: "",
+            nameStatus: false,
+            classStatus: false
+        });
     }
 
     closeSnackbar() {

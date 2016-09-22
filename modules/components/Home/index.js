@@ -48,17 +48,24 @@ class Home extends React.Component {
     }
 
     searchKeyChangeHandler(searchKey) {
-        this.setState({searchKey: searchKey, page: 1}, this.findBooks);
+        this.setState({
+            searchKey: searchKey,
+            page: 1
+        }, this.findBooks);
     }
 
     nextPageHandler() {
         let p = this.state.page + 1;
-        this.setState({page: p}, this.findBooks);
+        this.setState({
+            page: p
+        }, this.findBooks);
     }
 
     prevPageHandler() {
         let p = this.state.page - 1;
-        this.setState({page: p}, this.findBooks);
+        this.setState({
+            page: p
+        }, this.findBooks);
     }
 
     render() {
