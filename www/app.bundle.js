@@ -46712,7 +46712,7 @@
 	                    _react2.default.createElement(_BookList2.default, { books: this.state.books, students: this.state.students, total: this.state.total, signedIn: this.props.signedIn, onSearchKeyChange: this.searchKeyChangeHandler.bind(this) }),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'flex' },
+	                        { className: 'flex justify-center' },
 	                        _react2.default.createElement(_Paginator2.default, { page: this.state.page, pageSize: this.state.pageSize, total: this.state.total, onPrevious: this.prevPageHandler.bind(this), onNext: this.nextPageHandler.bind(this), showTotals: false })
 	                    )
 	                )
@@ -46791,7 +46791,7 @@
 	
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'flex' },
+	                { className: 'flex justify-center' },
 	                _react2.default.createElement(_TextField2.default, {
 	                    hintText: this.props.hintText,
 	                    value: this.props.searchKey,
@@ -46903,10 +46903,10 @@
 	
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'flex flex-column' },
+	                { className: 'flex flex-column justify-center' },
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'flex' },
+	                    { className: 'flex justify-center' },
 	                    _react2.default.createElement(
 	                        _IconButton2.default,
 	                        {
@@ -46924,7 +46924,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    null,
+	                    { className: 'flex justify-center' },
 	                    this.props.showTotals === true ? _react2.default.createElement(
 	                        'span',
 	                        null,
@@ -47060,18 +47060,13 @@
 	        value: function render() {
 	            var _this2 = this;
 	
-	            //remove container div to make each book paper the same size
 	            var listBooks = this.props.books.map(function (book) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    { key: book.id },
-	                    _react2.default.createElement(_BookListItem2.default, { book: book, students: _this2.props.students, signedIn: _this2.props.signedIn, onSearchKeyChange: _this2.props.onSearchKeyChange })
-	                );
+	                return _react2.default.createElement(_BookListItem2.default, { key: book.id, book: book, students: _this2.props.students, signedIn: _this2.props.signedIn, onSearchKeyChange: _this2.props.onSearchKeyChange });
 	            });
 	
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'paper-container' },
+	                { className: 'flex paper-container' },
 	                listBooks
 	            );
 	        }
@@ -47127,14 +47122,6 @@
 	var _Avatar = __webpack_require__(509);
 	
 	var _Avatar2 = _interopRequireDefault(_Avatar);
-	
-	var _List = __webpack_require__(479);
-	
-	var _List2 = _interopRequireDefault(_List);
-	
-	var _ListItem = __webpack_require__(475);
-	
-	var _ListItem2 = _interopRequireDefault(_ListItem);
 	
 	var _book = __webpack_require__(511);
 	
@@ -47304,26 +47291,6 @@
 	                primary: true,
 	                onTouchTap: this.handleCheckInSubmit.bind(this) })];
 	
-	            var authorStyle = {
-	                fontSize: 15,
-	                padding: 2,
-	                textAlign: 'center'
-	            };
-	
-	            var genreStyle = {
-	                fontSize: 13,
-	                padding: 2,
-	                textAlign: 'center'
-	            };
-	
-	            var badgeIconStyle = {
-	                cursor: "default"
-	            };
-	
-	            var buttonStyle = {
-	                margin: 10
-	            };
-	
 	            var dataSourceConfig = {
 	                text: 'name',
 	                value: 'id'
@@ -47333,25 +47300,22 @@
 	            var disabledIn = this.state.numberOut === 0 || this.props.signedIn === false;
 	
 	            return _react2.default.createElement(
-	                _Paper2.default,
-	                { className: 'library-paper' },
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'title' },
-	                    this.props.book.title
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
+	                    _Paper2.default,
+	                    { className: 'library-paper' },
 	                    _react2.default.createElement(
-	                        _List2.default,
-	                        null,
+	                        'div',
+	                        { className: 'title' },
+	                        this.props.book.title
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex flex-column align-center details' },
 	                        _react2.default.createElement(
-	                            _ListItem2.default,
-	                            {
-	                                disabled: true,
-	                                style: authorStyle
-	                            },
+	                            'div',
+	                            { className: 'author' },
 	                            _react2.default.createElement(
 	                                'a',
 	                                { href: 'javascript:void(0)', onClick: this.linkHandler.bind(this) },
@@ -47359,11 +47323,8 @@
 	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            _ListItem2.default,
-	                            {
-	                                disabled: true,
-	                                style: genreStyle
-	                            },
+	                            'div',
+	                            { className: 'genre' },
 	                            _react2.default.createElement(
 	                                'a',
 	                                { href: 'javascript:void(0)', onClick: this.linkHandler.bind(this) },
@@ -47371,20 +47332,14 @@
 	                            )
 	                        ),
 	                        _react2.default.createElement(
-	                            _ListItem2.default,
-	                            {
-	                                disabled: true,
-	                                style: genreStyle },
-	                            _react2.default.createElement(
-	                                _Avatar2.default,
-	                                null,
-	                                this.props.book.level
-	                            )
+	                            _Avatar2.default,
+	                            null,
+	                            this.props.book.level
 	                        )
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'flex' },
+	                        { className: 'flex justify-center' },
 	                        _react2.default.createElement(
 	                            _Badge2.default,
 	                            {
@@ -47394,7 +47349,7 @@
 	                            },
 	                            _react2.default.createElement(
 	                                _IconButton2.default,
-	                                { tooltip: 'Available Books', style: badgeIconStyle },
+	                                { tooltip: 'Available Books', style: { cursor: "default" } },
 	                                _react2.default.createElement(_book2.default, { color: 'rgb(188, 188, 188)' })
 	                            )
 	                        ),
@@ -47407,72 +47362,72 @@
 	                            },
 	                            _react2.default.createElement(
 	                                _IconButton2.default,
-	                                { tooltip: 'Checked Out Books', style: badgeIconStyle },
+	                                { tooltip: 'Checked Out Books', style: { cursor: "default" } },
 	                                _react2.default.createElement(_checkCircle2.default, { color: 'rgb(188, 188, 188)' })
 	                            )
 	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-center' },
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Check Out',
+	                            secondary: true,
+	                            style: { margin: 10 },
+	                            onTouchTap: this.handleCheckOutOpen.bind(this),
+	                            disabled: disabledOut }),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Check In',
+	                            primary: true,
+	                            style: { margin: 10 },
+	                            onTouchTap: this.findStudentsByBook.bind(this),
+	                            disabled: disabledIn })
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex' },
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Check Out',
-	                        secondary: true,
-	                        style: buttonStyle,
-	                        onTouchTap: this.handleCheckOutOpen.bind(this),
-	                        disabled: disabledOut }),
+	                    _Dialog2.default,
+	                    {
+	                        title: this.props.book.title,
+	                        actions: checkOutModalActions,
+	                        modal: true,
+	                        open: this.state.checkOutOpen },
 	                    _react2.default.createElement(
-	                        _Dialog2.default,
-	                        {
-	                            title: this.props.book.title,
-	                            actions: checkOutModalActions,
-	                            modal: true,
-	                            open: this.state.checkOutOpen },
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'Choose a name and click submit to check book out.'
-	                        ),
-	                        _react2.default.createElement(_AutoComplete2.default, { autoFocus: true,
-	                            floatingLabelText: 'Search Students',
-	                            hintText: 'Enter Name (e.g., Henry Tudor)',
-	                            filter: _AutoComplete2.default.caseInsensitiveFilter,
-	                            errorText: this.state.checkOutStatus,
-	                            dataSource: this.props.students,
-	                            dataSourceConfig: dataSourceConfig,
-	                            maxSearchResults: 5,
-	                            onNewRequest: this.handleNewRequest.bind(this),
-	                            onUpdateInput: this.handleUpdateInput.bind(this) })
+	                        'p',
+	                        null,
+	                        'Choose a name and click submit to check book out.'
 	                    ),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Check In',
-	                        primary: true,
-	                        style: buttonStyle,
-	                        onTouchTap: this.findStudentsByBook.bind(this),
-	                        disabled: disabledIn }),
+	                    _react2.default.createElement(_AutoComplete2.default, { autoFocus: true,
+	                        floatingLabelText: 'Search Students',
+	                        hintText: 'Enter Name (e.g., Henry Tudor)',
+	                        filter: _AutoComplete2.default.caseInsensitiveFilter,
+	                        errorText: this.state.checkOutStatus,
+	                        dataSource: this.props.students,
+	                        dataSourceConfig: dataSourceConfig,
+	                        maxSearchResults: 5,
+	                        onNewRequest: this.handleNewRequest.bind(this),
+	                        onUpdateInput: this.handleUpdateInput.bind(this) })
+	                ),
+	                _react2.default.createElement(
+	                    _Dialog2.default,
+	                    {
+	                        title: this.props.book.title,
+	                        actions: checkInModalActions,
+	                        modal: true,
+	                        open: this.state.checkInOpen },
 	                    _react2.default.createElement(
-	                        _Dialog2.default,
-	                        {
-	                            title: this.props.book.title,
-	                            actions: checkInModalActions,
-	                            modal: true,
-	                            open: this.state.checkInOpen },
-	                        _react2.default.createElement(
-	                            'p',
-	                            null,
-	                            'Choose a name and click submit to check book in.'
-	                        ),
-	                        _react2.default.createElement(_AutoComplete2.default, {
-	                            floatingLabelText: 'Students With Book',
-	                            hintText: 'Choose Name (e.g., Henry Tudor)',
-	                            filter: _AutoComplete2.default.caseInsensitiveFilter,
-	                            openOnFocus: true,
-	                            dataSource: this.state.studentsByBook,
-	                            dataSourceConfig: dataSourceConfig,
-	                            onNewRequest: this.handleNewRequest.bind(this),
-	                            onUpdateInput: this.handleUpdateInput.bind(this) })
-	                    )
+	                        'p',
+	                        null,
+	                        'Choose a name and click submit to check book in.'
+	                    ),
+	                    _react2.default.createElement(_AutoComplete2.default, {
+	                        floatingLabelText: 'Students With Book',
+	                        hintText: 'Choose Name (e.g., Henry Tudor)',
+	                        filter: _AutoComplete2.default.caseInsensitiveFilter,
+	                        openOnFocus: true,
+	                        dataSource: this.state.studentsByBook,
+	                        dataSourceConfig: dataSourceConfig,
+	                        onNewRequest: this.handleNewRequest.bind(this),
+	                        onUpdateInput: this.handleUpdateInput.bind(this) })
 	                )
 	            );
 	        }
@@ -48807,13 +48762,8 @@
 	        value: function render() {
 	            var _this3 = this;
 	
-	            //remove container div to make each book paper the same size
 	            var listBooks = this.state.books.map(function (book) {
-	                return _react2.default.createElement(
-	                    'div',
-	                    { key: book.book_id },
-	                    _react2.default.createElement(_CheckedOutBook2.default, { book: book, signedIn: _this3.props.signedIn })
-	                );
+	                return _react2.default.createElement(_CheckedOutBook2.default, { key: book.book_id, book: book, signedIn: _this3.props.signedIn });
 	            });
 	
 	            return _react2.default.createElement(
@@ -48830,12 +48780,12 @@
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'paper-container' },
+	                        { className: 'flex paper-container' },
 	                        listBooks
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'flex' },
+	                        { className: 'flex justify-center' },
 	                        _react2.default.createElement(_Paginator2.default, { page: this.state.page, pageSize: this.state.pageSize, total: this.state.total, onPrevious: this.prevPageHandler.bind(this), onNext: this.nextPageHandler.bind(this), showTotals: false })
 	                    )
 	                )
@@ -48918,17 +48868,21 @@
 	            });
 	
 	            return _react2.default.createElement(
-	                _Paper2.default,
-	                { className: 'library-paper' },
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'title' },
-	                    this.props.book.title
-	                ),
-	                _react2.default.createElement(
-	                    _List2.default,
-	                    null,
-	                    this.props.signedIn === true ? listStudents : ""
+	                    _Paper2.default,
+	                    { className: 'library-paper' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'title' },
+	                        this.props.book.title
+	                    ),
+	                    _react2.default.createElement(
+	                        _List2.default,
+	                        null,
+	                        this.props.signedIn === true ? listStudents : ""
+	                    )
 	                )
 	            );
 	        }
@@ -49009,7 +48963,7 @@
 	            var _this2 = this;
 	
 	            var _ = __webpack_require__(533);
-	            libraryService.findAllStudents({ active: "only active + total" }).then(function (data) {
+	            libraryService.findAllStudents({ active: "only active + books" }).then(function (data) {
 	                _this2.setState({
 	                    students: _.groupBy(data.students, function (d) {
 	                        return d.class;
@@ -49025,12 +48979,6 @@
 	                return Object.keys(object).map(function (key) {
 	                    return callback(key, object[key]);
 	                });
-	            };
-	
-	            var tdStyle = {
-	                overflowX: "auto",
-	                overflowY: "hidden",
-	                textOverflow: "initial"
 	            };
 	
 	            var tabStyle = {
@@ -49061,7 +49009,7 @@
 	                        ),
 	                        _react2.default.createElement(
 	                            _Table.TableRowColumn,
-	                            { style: student.books_out.length > 0 ? tdStyle : {} },
+	                            null,
 	                            student.books_out.join(" || ")
 	                        )
 	                    );
@@ -49073,18 +49021,19 @@
 	                        key: key },
 	                    _react2.default.createElement(
 	                        'div',
-	                        { className: 'paper-container' },
+	                        { className: 'flex paper-container' },
 	                        _react2.default.createElement(
 	                            _Paper2.default,
 	                            { className: 'students-paper' },
 	                            _react2.default.createElement(
 	                                _Table.Table,
-	                                null,
+	                                {
+	                                    style: { tableLayout: 'auto' },
+	                                    bodyStyle: { overflow: 'auto' } },
 	                                _react2.default.createElement(
-	                                    _Table.TableHeader,
+	                                    _Table.TableBody,
 	                                    {
-	                                        displaySelectAll: false,
-	                                        adjustForCheckbox: false },
+	                                        displayRowCheckbox: false },
 	                                    _react2.default.createElement(
 	                                        _Table.TableRow,
 	                                        null,
@@ -49103,12 +49052,7 @@
 	                                            null,
 	                                            'Books Out'
 	                                        )
-	                                    )
-	                                ),
-	                                _react2.default.createElement(
-	                                    _Table.TableBody,
-	                                    {
-	                                        displayRowCheckbox: false },
+	                                    ),
 	                                    listStudents
 	                                )
 	                            )
@@ -49125,7 +49069,7 @@
 	                    { className: 'students' },
 	                    this.props.signedIn === false ? _react2.default.createElement(
 	                        'p',
-	                        { className: 'paper-container' },
+	                        { className: 'flex paper-container' },
 	                        'Sign in to view this page.'
 	                    ) : _react2.default.createElement(
 	                        _Tabs.Tabs,
@@ -54253,7 +54197,7 @@
 	                    { className: 'admin' },
 	                    this.props.adminStatus === false ? _react2.default.createElement(
 	                        'p',
-	                        { className: 'paper-container' },
+	                        { className: 'flex paper-container' },
 	                        'You do not have access to this page.'
 	                    ) : _react2.default.createElement(
 	                        _Tabs.Tabs,
@@ -54267,17 +54211,9 @@
 	                            { label: 'Users' },
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'paper-container' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    null,
-	                                    _react2.default.createElement(_AddUser2.default, null)
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    null,
-	                                    _react2.default.createElement(_ChangePassword2.default, null)
-	                                )
+	                                { className: 'flex paper-container' },
+	                                _react2.default.createElement(_AddUser2.default, null),
+	                                _react2.default.createElement(_ChangePassword2.default, null)
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -54285,17 +54221,9 @@
 	                            { label: 'Books' },
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'paper-container' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    null,
-	                                    _react2.default.createElement(_AddBook2.default, { findBooks: this.findBooks.bind(this) })
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    null,
-	                                    _react2.default.createElement(_UpdateBook2.default, { books: this.state.books, findBooks: this.findBooks.bind(this) })
-	                                )
+	                                { className: 'flex paper-container' },
+	                                _react2.default.createElement(_AddBook2.default, { findBooks: this.findBooks.bind(this) }),
+	                                _react2.default.createElement(_UpdateBook2.default, { books: this.state.books, findBooks: this.findBooks.bind(this) })
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -54303,17 +54231,9 @@
 	                            { label: 'Students' },
 	                            _react2.default.createElement(
 	                                'div',
-	                                { className: 'paper-container' },
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    null,
-	                                    _react2.default.createElement(_AddStudent2.default, { findStudents: this.findStudents.bind(this) })
-	                                ),
-	                                _react2.default.createElement(
-	                                    'div',
-	                                    null,
-	                                    _react2.default.createElement(_UpdateStudent2.default, { students: this.state.students, findStudents: this.findStudents.bind(this) })
-	                                )
+	                                { className: 'flex paper-container' },
+	                                _react2.default.createElement(_AddStudent2.default, { findStudents: this.findStudents.bind(this) }),
+	                                _react2.default.createElement(_UpdateStudent2.default, { students: this.state.students, findStudents: this.findStudents.bind(this) })
 	                            )
 	                        )
 	                    )
@@ -54512,10 +54432,6 @@
 	                primary: true,
 	                onTouchTap: this.addUser.bind(this) })];
 	
-	            var dialogStyle = {
-	                textAlign: "center"
-	            };
-	
 	            var contentStyle = {
 	                display: 'inline-block',
 	                width: 'auto',
@@ -54525,79 +54441,97 @@
 	            };
 	
 	            return _react2.default.createElement(
-	                _Paper2.default,
-	                { className: 'admin-paper' },
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'title' },
-	                    'Create New Account'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex flex-column add-user-textfield' },
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Username',
-	                        floatingLabelText: 'Username',
-	                        errorText: this.state.userStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.user,
-	                        fullWidth: true,
-	                        onChange: this.handleUserChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Password',
-	                        floatingLabelText: 'Password',
-	                        type: 'password',
-	                        errorText: this.state.passStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.pass,
-	                        fullWidth: true,
-	                        onChange: this.handlePassChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Password',
-	                        floatingLabelText: 'Confirm Password',
-	                        type: 'password',
-	                        errorText: this.state.passStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.passConf,
-	                        fullWidth: true,
-	                        onChange: this.handleConfirmPassChange.bind(this) }),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
+	                    _Paper2.default,
+	                    { className: 'admin-paper' },
 	                    _react2.default.createElement(
-	                        _RadioButton.RadioButtonGroup,
-	                        { valueSelected: this.state.admin, defaultSelected: 'false', name: 'accountType', onChange: this.handleAdminCheck.bind(this) },
-	                        _react2.default.createElement(_RadioButton.RadioButton, {
-	                            value: 'true',
-	                            label: 'Teacher' }),
-	                        _react2.default.createElement(_RadioButton.RadioButton, {
-	                            value: 'false',
-	                            label: 'Librarian' })
+	                        'div',
+	                        { className: 'title' },
+	                        'Create New Account'
 	                    ),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex' },
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Clear',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleClear.bind(this) }),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Add User',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.openDialog.bind(this) })
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex flex-column align-center add-user-textfield' },
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Username',
+	                            floatingLabelText: 'Username *',
+	                            errorText: this.state.userStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.user,
+	                            fullWidth: true,
+	                            onChange: this.handleUserChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Password',
+	                            floatingLabelText: 'Password *',
+	                            type: 'password',
+	                            errorText: this.state.passStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.pass,
+	                            fullWidth: true,
+	                            onChange: this.handlePassChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Password',
+	                            floatingLabelText: 'Confirm Password *',
+	                            type: 'password',
+	                            errorText: this.state.passStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.passConf,
+	                            fullWidth: true,
+	                            onChange: this.handleConfirmPassChange.bind(this) }),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'account-type' },
+	                            'Account Type *'
+	                        ),
+	                        _react2.default.createElement(
+	                            _RadioButton.RadioButtonGroup,
+	                            { valueSelected: this.state.admin, defaultSelected: 'false', name: 'accountType', onChange: this.handleAdminCheck.bind(this) },
+	                            _react2.default.createElement(_RadioButton.RadioButton, {
+	                                value: 'true',
+	                                label: 'Teacher' }),
+	                            _react2.default.createElement(_RadioButton.RadioButton, {
+	                                value: 'false',
+	                                label: 'Librarian' })
+	                        ),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-center' },
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Clear',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleClear.bind(this) }),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Add User',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.openDialog.bind(this) })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-start' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'required' },
+	                            '* required field'
+	                        )
+	                    )
 	                ),
 	                _react2.default.createElement(
 	                    _Dialog2.default,
 	                    {
 	                        actions: actions,
 	                        modal: false,
-	                        style: dialogStyle,
+	                        style: { textAlign: "center" },
 	                        contentStyle: contentStyle,
 	                        open: this.state.addUserOpen,
 	                        onRequestClose: this.closeDialog.bind(this)
@@ -55987,10 +55921,6 @@
 	                primary: true,
 	                onTouchTap: this.changePassword.bind(this) })];
 	
-	            var dialogStyle = {
-	                textAlign: "center"
-	            };
-	
 	            var contentStyle = {
 	                display: 'inline-block',
 	                width: 'auto',
@@ -56000,64 +55930,77 @@
 	            };
 	
 	            return _react2.default.createElement(
-	                _Paper2.default,
-	                { className: 'admin-paper' },
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'title' },
-	                    'Change Password'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex flex-column' },
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Username',
-	                        floatingLabelText: 'Username',
-	                        errorText: this.state.userStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.user,
-	                        fullWidth: true,
-	                        onChange: this.handleUserChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter New Password',
-	                        floatingLabelText: 'New Password',
-	                        type: 'password',
-	                        errorText: this.state.passStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.pass,
-	                        fullWidth: true,
-	                        onChange: this.handlePassChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter New Password',
-	                        floatingLabelText: 'Confirm New Password',
-	                        type: 'password',
-	                        errorText: this.state.passStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.passConf,
-	                        fullWidth: true,
-	                        onChange: this.handleConfirmPassChange.bind(this) }),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex' },
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Clear',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleClear.bind(this) }),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Change Password',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.openDialog.bind(this) })
+	                    _Paper2.default,
+	                    { className: 'admin-paper' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'title' },
+	                        'Change Password'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex flex-column align-center' },
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Username',
+	                            floatingLabelText: 'Username *',
+	                            errorText: this.state.userStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.user,
+	                            fullWidth: true,
+	                            onChange: this.handleUserChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter New Password',
+	                            floatingLabelText: 'New Password *',
+	                            type: 'password',
+	                            errorText: this.state.passStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.pass,
+	                            fullWidth: true,
+	                            onChange: this.handlePassChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter New Password',
+	                            floatingLabelText: 'Confirm New Password *',
+	                            type: 'password',
+	                            errorText: this.state.passStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.passConf,
+	                            fullWidth: true,
+	                            onChange: this.handleConfirmPassChange.bind(this) }),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-center' },
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Clear',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleClear.bind(this) }),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Change Password',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.openDialog.bind(this) })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-start' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'required' },
+	                            '* required field'
+	                        )
+	                    )
 	                ),
 	                _react2.default.createElement(
 	                    _Dialog2.default,
 	                    {
 	                        actions: actions,
 	                        modal: false,
-	                        style: dialogStyle,
+	                        style: { textAlign: "center" },
 	                        contentStyle: contentStyle,
 	                        open: this.state.changePassOpen,
 	                        onRequestClose: this.closeDialog.bind(this)
@@ -56193,8 +56136,6 @@
 	        value: function handleAddBook() {
 	            this.state.title === "" ? this.setState({ titleStatus: "Required field" }) : this.setState({ titleStatus: false });
 	            this.state.author === "" ? this.setState({ authorStatus: "Required field" }) : this.setState({ authorStatus: false });
-	            this.state.genre === "" ? this.setState({ genreStatus: "Required field" }) : this.setState({ genreStatus: false });
-	            this.state.level === "" ? this.setState({ levelStatus: "Required field" }) : this.setState({ levelStatus: false });
 	
 	            if (this.state.numberIn === "") {
 	                this.setState({ numberInStatus: "Required field" });
@@ -56204,7 +56145,7 @@
 	                this.setState({ numberInStatus: false });
 	            }
 	
-	            if (this.state.title !== "" && this.state.author !== "" && this.state.genre !== "" && this.state.level !== "" && this.state.numberIn > 0) {
+	            if (this.state.title !== "" && this.state.author !== "" && this.state.numberIn > 0 && this.state.numberIn !== "") {
 	                this.addBook();
 	            }
 	        }
@@ -56263,74 +56204,87 @@
 	        value: function render() {
 	
 	            return _react2.default.createElement(
-	                _Paper2.default,
-	                { className: 'admin-paper' },
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'title' },
-	                    'Create New Book'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex flex-column' },
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Title (e.g., 1984)',
-	                        floatingLabelText: 'Title',
-	                        errorText: this.state.titleStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.title,
-	                        fullWidth: true,
-	                        onChange: this.handleTitleChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Author (e.g., George Orwell)',
-	                        floatingLabelText: 'Author',
-	                        errorText: this.state.authorStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.author,
-	                        fullWidth: true,
-	                        onChange: this.handleAuthorChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Genre (e.g., Classics)',
-	                        floatingLabelText: 'Genre',
-	                        errorText: this.state.genreStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.genre,
-	                        fullWidth: true,
-	                        onChange: this.handleGenreChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Reading Level (e.g., Z)',
-	                        floatingLabelText: 'Reading Level',
-	                        errorText: this.state.levelStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.level,
-	                        fullWidth: true,
-	                        onChange: this.handleLevelChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Number of Books (e.g., 2)',
-	                        floatingLabelText: 'Number of Books',
-	                        type: 'number',
-	                        min: '0',
-	                        step: '1',
-	                        errorText: this.state.numberInStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.numberIn,
-	                        fullWidth: true,
-	                        onChange: this.handleNumberInChange.bind(this) }),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex' },
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Clear',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleClear.bind(this) }),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Add Book',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleAddBook.bind(this) })
+	                    _Paper2.default,
+	                    { className: 'admin-paper' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'title' },
+	                        'Create New Book'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex flex-column align-center' },
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Title (e.g., 1984)',
+	                            floatingLabelText: 'Title *',
+	                            errorText: this.state.titleStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.title,
+	                            fullWidth: true,
+	                            onChange: this.handleTitleChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Author (e.g., George Orwell)',
+	                            floatingLabelText: 'Author *',
+	                            errorText: this.state.authorStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.author,
+	                            fullWidth: true,
+	                            onChange: this.handleAuthorChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Genre (e.g., Classics)',
+	                            floatingLabelText: 'Genre',
+	                            errorText: this.state.genreStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.genre,
+	                            fullWidth: true,
+	                            onChange: this.handleGenreChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Reading Level (e.g., Z)',
+	                            floatingLabelText: 'Reading Level',
+	                            errorText: this.state.levelStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.level,
+	                            fullWidth: true,
+	                            onChange: this.handleLevelChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Number of Books (e.g., 2)',
+	                            floatingLabelText: 'Number of Books *',
+	                            type: 'number',
+	                            min: '0',
+	                            step: '1',
+	                            errorText: this.state.numberInStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.numberIn,
+	                            fullWidth: true,
+	                            onChange: this.handleNumberInChange.bind(this) }),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-center' },
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Clear',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleClear.bind(this) }),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Add Book',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleAddBook.bind(this) })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-start' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'required' },
+	                            '* required field'
+	                        )
+	                    )
 	                ),
 	                _react2.default.createElement(_Snackbar2.default, {
 	                    open: this.state.snackOpen,
@@ -56508,8 +56462,6 @@
 	        value: function handleUpdateBook() {
 	            this.state.title === "" ? this.setState({ titleStatus: "Required field" }) : this.setState({ titleStatus: false });
 	            this.state.author === "" ? this.setState({ authorStatus: "Required field" }) : this.setState({ authorStatus: false });
-	            this.state.genre === "" ? this.setState({ genreStatus: "Required field" }) : this.setState({ genreStatus: false });
-	            this.state.level === "" ? this.setState({ levelStatus: "Required field" }) : this.setState({ levelStatus: false });
 	
 	            if (this.state.numberIn === "") {
 	                this.setState({ numberInStatus: "Required field" });
@@ -56527,7 +56479,7 @@
 	                this.setState({ numberOutStatus: false });
 	            }
 	
-	            if (this.state.title !== "" && this.state.author !== "" && this.state.genre !== "" && this.state.level !== "" && this.state.numberIn >= 0 && this.state.numberOut >= 0) {
+	            if (this.state.title !== "" && this.state.author !== "" && this.state.numberIn >= 0 && this.state.numberOut >= 0 && this.state.numberIn !== "" && this.state.numberOut !== "") {
 	                this.updateBook();
 	            }
 	        }
@@ -56592,113 +56544,135 @@
 	            };
 	
 	            return _react2.default.createElement(
-	                _Paper2.default,
-	                { className: 'admin-paper' },
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'title' },
-	                    'Update Book'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex flex-column update-textfield' },
-	                    _react2.default.createElement(_AutoComplete2.default, {
-	                        ref: "autocomplete",
-	                        floatingLabelText: 'Search Existing Books',
-	                        hintText: 'Enter Title (e.g., 1984)',
-	                        errorText: this.state.searchError,
-	                        filter: _AutoComplete2.default.caseInsensitiveFilter,
-	                        dataSource: this.props.books,
-	                        dataSourceConfig: dataSourceConfig,
-	                        maxSearchResults: 5,
-	                        fullWidth: true,
-	                        onNewRequest: this.handleNewRequest.bind(this),
-	                        onUpdateInput: this.handleUpdateInput.bind(this) }),
-	                    _react2.default.createElement('br', null),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Get Book Info',
-	                        type: 'submit',
-	                        primary: true,
-	                        disabled: this.state.bookId == null ? true : false,
-	                        onTouchTap: this.findBookById.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Title (e.g., 1984)',
-	                        floatingLabelText: 'Title',
-	                        errorText: this.state.titleStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.title,
-	                        fullWidth: true,
-	                        onChange: this.handleTitleChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Author (e.g., George Orwell)',
-	                        floatingLabelText: 'Author',
-	                        errorText: this.state.authorStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.author,
-	                        fullWidth: true,
-	                        onChange: this.handleAuthorChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Genre (e.g., Classics)',
-	                        floatingLabelText: 'Genre',
-	                        errorText: this.state.genreStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.genre,
-	                        fullWidth: true,
-	                        onChange: this.handleGenreChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Reading Level (e.g., Z)',
-	                        floatingLabelText: 'Reading Level',
-	                        errorText: this.state.levelStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.level,
-	                        fullWidth: true,
-	                        onChange: this.handleLevelChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Number of Books (e.g., 2)',
-	                        floatingLabelText: 'Number of Books Checked In',
-	                        type: 'number',
-	                        min: '0',
-	                        step: '1',
-	                        errorText: this.state.numberInStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.numberIn,
-	                        fullWidth: true,
-	                        onChange: this.handleNumberInChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Number of Books (e.g., 2)',
-	                        floatingLabelText: 'Number of Books Checked Out',
-	                        type: 'number',
-	                        min: '0',
-	                        step: '1',
-	                        errorText: this.state.numberOutStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.numberOut,
-	                        fullWidth: true,
-	                        onChange: this.handleNumberOutChange.bind(this) }),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(_Checkbox2.default, {
-	                        label: 'Available',
-	                        checked: this.state.available,
-	                        onCheck: this.handleCheck.bind(this) }),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex' },
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Clear',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleClear.bind(this) }),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Update Book',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleUpdateBook.bind(this) })
+	                    _Paper2.default,
+	                    { className: 'admin-paper' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'title' },
+	                        'Update Book'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex flex-column align-center update-textfield' },
+	                        _react2.default.createElement(_AutoComplete2.default, {
+	                            ref: "autocomplete",
+	                            floatingLabelText: 'Search Existing Books',
+	                            hintText: 'Enter Title (e.g., 1984)',
+	                            errorText: this.state.searchError,
+	                            filter: _AutoComplete2.default.caseInsensitiveFilter,
+	                            dataSource: this.props.books,
+	                            dataSourceConfig: dataSourceConfig,
+	                            maxSearchResults: 5,
+	                            fullWidth: true,
+	                            onNewRequest: this.handleNewRequest.bind(this),
+	                            onUpdateInput: this.handleUpdateInput.bind(this) }),
+	                        _react2.default.createElement('br', null),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Get Book Info',
+	                            type: 'submit',
+	                            primary: true,
+	                            disabled: this.state.bookId == null ? true : false,
+	                            onTouchTap: this.findBookById.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Title (e.g., 1984)',
+	                            floatingLabelText: 'Title *',
+	                            errorText: this.state.titleStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.title,
+	                            fullWidth: true,
+	                            onChange: this.handleTitleChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Author (e.g., George Orwell)',
+	                            floatingLabelText: 'Author *',
+	                            errorText: this.state.authorStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.author,
+	                            fullWidth: true,
+	                            onChange: this.handleAuthorChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Genre (e.g., Classics)',
+	                            floatingLabelText: 'Genre',
+	                            errorText: this.state.genreStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.genre,
+	                            fullWidth: true,
+	                            onChange: this.handleGenreChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Reading Level (e.g., Z)',
+	                            floatingLabelText: 'Reading Level',
+	                            errorText: this.state.levelStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.level,
+	                            fullWidth: true,
+	                            onChange: this.handleLevelChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Number of Books (e.g., 2)',
+	                            floatingLabelText: 'Number of Books Checked In *',
+	                            type: 'number',
+	                            min: '0',
+	                            step: '1',
+	                            errorText: this.state.numberInStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.numberIn,
+	                            fullWidth: true,
+	                            onChange: this.handleNumberInChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Number of Books (e.g., 2)',
+	                            floatingLabelText: 'Number of Books Checked Out *',
+	                            type: 'number',
+	                            min: '0',
+	                            step: '1',
+	                            errorText: this.state.numberOutStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.numberOut,
+	                            fullWidth: true,
+	                            onChange: this.handleNumberOutChange.bind(this) }),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(_Checkbox2.default, {
+	                            label: 'Available **',
+	                            checked: this.state.available,
+	                            onCheck: this.handleCheck.bind(this) }),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-center' },
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Clear',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleClear.bind(this) }),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Update Book',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleUpdateBook.bind(this) })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-start' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'required' },
+	                            '* required field'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-start' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'required' },
+	                            '** available books are listed in the library'
+	                        )
+	                    )
 	                ),
 	                _react2.default.createElement(_Snackbar2.default, {
 	                    open: this.state.snackOpen,
@@ -56850,47 +56824,60 @@
 	        value: function render() {
 	
 	            return _react2.default.createElement(
-	                _Paper2.default,
-	                { className: 'admin-paper' },
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'title' },
-	                    'Create New Student'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex flex-column' },
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Name (e.g., Brian Hamilton)',
-	                        floatingLabelText: 'Name',
-	                        errorText: this.state.nameStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.name,
-	                        fullWidth: true,
-	                        onChange: this.handleNameChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Class (e.g., 601)',
-	                        floatingLabelText: 'Class',
-	                        errorText: this.state.classStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.class,
-	                        fullWidth: true,
-	                        onChange: this.handleClassChange.bind(this) }),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex' },
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Clear',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleClear.bind(this) }),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Add Student',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleAddStudent.bind(this) })
+	                    _Paper2.default,
+	                    { className: 'admin-paper' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'title' },
+	                        'Create New Student'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex flex-column align-center' },
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Name (e.g., Brian Hamilton)',
+	                            floatingLabelText: 'Name *',
+	                            errorText: this.state.nameStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.name,
+	                            fullWidth: true,
+	                            onChange: this.handleNameChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Class (e.g., 601)',
+	                            floatingLabelText: 'Class *',
+	                            errorText: this.state.classStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.class,
+	                            fullWidth: true,
+	                            onChange: this.handleClassChange.bind(this) }),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-center' },
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Clear',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleClear.bind(this) }),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Add Student',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleAddStudent.bind(this) })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-start' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'required' },
+	                            '* required field'
+	                        )
+	                    )
 	                ),
 	                _react2.default.createElement(_Snackbar2.default, {
 	                    open: this.state.snackOpen,
@@ -57086,74 +57073,96 @@
 	            };
 	
 	            return _react2.default.createElement(
-	                _Paper2.default,
-	                { className: 'admin-paper' },
+	                'div',
+	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'title' },
-	                    'Update Student'
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex flex-column update-textfield' },
-	                    _react2.default.createElement(_AutoComplete2.default, {
-	                        ref: "autocomplete",
-	                        floatingLabelText: 'Search Existing Students',
-	                        hintText: 'Enter Name (e.g., Brian Hamilton)',
-	                        filter: _AutoComplete2.default.caseInsensitiveFilter,
-	                        dataSource: this.props.students,
-	                        dataSourceConfig: dataSourceConfig,
-	                        maxSearchResults: 5,
-	                        fullWidth: true,
-	                        onNewRequest: this.handleNewRequest.bind(this),
-	                        onUpdateInput: this.handleUpdateInput.bind(this) }),
-	                    _react2.default.createElement('br', null),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Get Student Info',
-	                        type: 'submit',
-	                        primary: true,
-	                        disabled: this.state.studentId == null ? true : false,
-	                        onTouchTap: this.findStudentById.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Name (e.g., Brian Hamilton)',
-	                        floatingLabelText: 'Name',
-	                        errorText: this.state.nameStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.name,
-	                        fullWidth: true,
-	                        onChange: this.handleNameChange.bind(this) }),
-	                    _react2.default.createElement(_TextField2.default, {
-	                        hintText: 'Enter Class (e.g., 601)',
-	                        floatingLabelText: 'Class',
-	                        errorText: this.state.classStatus,
-	                        onKeyDown: this.handleKeyDown.bind(this),
-	                        value: this.state.class,
-	                        fullWidth: true,
-	                        onChange: this.handleClassChange.bind(this) }),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(_Checkbox2.default, {
-	                        label: 'Active',
-	                        checked: this.state.active,
-	                        onCheck: this.handleCheck.bind(this) }),
-	                    _react2.default.createElement('br', null)
-	                ),
-	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'flex' },
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Clear',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleClear.bind(this) }),
-	                    _react2.default.createElement(_FlatButton2.default, {
-	                        label: 'Update Student',
-	                        type: 'submit',
-	                        primary: true,
-	                        onTouchTap: this.handleUpdateStudent.bind(this) })
+	                    _Paper2.default,
+	                    { className: 'admin-paper' },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'title' },
+	                        'Update Student'
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex flex-column align-center update-textfield' },
+	                        _react2.default.createElement(_AutoComplete2.default, {
+	                            ref: "autocomplete",
+	                            floatingLabelText: 'Search All Students',
+	                            hintText: 'Enter Name (e.g., Brian Hamilton)',
+	                            filter: _AutoComplete2.default.caseInsensitiveFilter,
+	                            dataSource: this.props.students,
+	                            dataSourceConfig: dataSourceConfig,
+	                            maxSearchResults: 5,
+	                            fullWidth: true,
+	                            onNewRequest: this.handleNewRequest.bind(this),
+	                            onUpdateInput: this.handleUpdateInput.bind(this) }),
+	                        _react2.default.createElement('br', null),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Get Student Info',
+	                            type: 'submit',
+	                            primary: true,
+	                            disabled: this.state.studentId == null ? true : false,
+	                            onTouchTap: this.findStudentById.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Name (e.g., Brian Hamilton)',
+	                            floatingLabelText: 'Name *',
+	                            errorText: this.state.nameStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.name,
+	                            fullWidth: true,
+	                            onChange: this.handleNameChange.bind(this) }),
+	                        _react2.default.createElement(_TextField2.default, {
+	                            hintText: 'Enter Class (e.g., 601)',
+	                            floatingLabelText: 'Class *',
+	                            errorText: this.state.classStatus,
+	                            onKeyDown: this.handleKeyDown.bind(this),
+	                            value: this.state.class,
+	                            fullWidth: true,
+	                            onChange: this.handleClassChange.bind(this) }),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        _react2.default.createElement(_Checkbox2.default, {
+	                            label: 'Active **',
+	                            checked: this.state.active,
+	                            onCheck: this.handleCheck.bind(this) }),
+	                        _react2.default.createElement('br', null)
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-center' },
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Clear',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleClear.bind(this) }),
+	                        _react2.default.createElement(_FlatButton2.default, {
+	                            label: 'Update Student',
+	                            type: 'submit',
+	                            primary: true,
+	                            onTouchTap: this.handleUpdateStudent.bind(this) })
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-start' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'required' },
+	                            '* required field'
+	                        )
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'flex justify-start' },
+	                        _react2.default.createElement(
+	                            'p',
+	                            { className: 'required' },
+	                            '** active students appear on students page and can check books out'
+	                        )
+	                    )
 	                ),
 	                _react2.default.createElement(_Snackbar2.default, {
 	                    open: this.state.snackOpen,

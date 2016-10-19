@@ -1,7 +1,7 @@
 import React from 'react';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Paper from 'material-ui/Paper';
-import {Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+import {Table, TableBody, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 import * as libraryService from './../../services/library-service';
@@ -22,7 +22,7 @@ class Students extends React.Component {
 
     findStudents() {
         let _ = require('underscore');
-        libraryService.findAllStudents({active: "only active + total"})
+        libraryService.findAllStudents({active: "only active + books"})
             .then(data => {
                 this.setState({
                     students: _.groupBy(data.students, function (d) {return d.class})
@@ -37,12 +37,6 @@ class Students extends React.Component {
                 return callback(key, object[key]);
             });
         }
-
-        const tdStyle = {
-            overflowX: "auto",
-            overflowY: "hidden",
-            textOverflow: "initial"
-        };
 
         const tabStyle = {
             position: 'fixed',
@@ -60,27 +54,25 @@ class Students extends React.Component {
                 <TableRow key={student.id}>
                     <TableRowColumn>{student.name}</TableRowColumn>
                     <TableRowColumn>{student.total_out}</TableRowColumn>
-                    <TableRowColumn style={student.books_out.length > 0 ? tdStyle : {}}>{student.books_out.join(" || ")}</TableRowColumn>
+                    <TableRowColumn>{student.books_out.join(" || ")}</TableRowColumn>
                 </TableRow>
             ));
             return (
                 <Tab
                     label={key}
                     key={key}>
-                    <div className="paper-container">
+                    <div className="flex paper-container">
                         <Paper className="students-paper">
-                            <Table>
-                                <TableHeader
-                                    displaySelectAll={false}
-                                    adjustForCheckbox={false}>
+                            <Table
+                                style={{tableLayout:'auto'}}
+                                bodyStyle={{overflow:'auto'}}>
+                                <TableBody
+                                    displayRowCheckbox={false}>
                                     <TableRow>
                                         <TableHeaderColumn>Name</TableHeaderColumn>
                                         <TableHeaderColumn>Number of Books Out</TableHeaderColumn>
                                         <TableHeaderColumn>Books Out</TableHeaderColumn>
                                     </TableRow>
-                                </TableHeader>
-                                <TableBody
-                                    displayRowCheckbox={false}>
                                     {listStudents}
                                 </TableBody>
                             </Table>
@@ -94,7 +86,7 @@ class Students extends React.Component {
             <MuiThemeProvider>
                 <div className="students">
                     {this.props.signedIn === false ? 
-                        <p className="paper-container">Sign in to view this page.</p> :
+                        <p className="flex paper-container">Sign in to view this page.</p> :
                         <Tabs
                             className="tab-container"
                             contentContainerClassName="tab-content"

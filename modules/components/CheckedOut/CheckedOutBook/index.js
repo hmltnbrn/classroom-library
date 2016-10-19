@@ -15,12 +15,14 @@ class CheckedOutBook extends React.Component {
         );
 
         return (
-            <Paper className="library-paper">
-                <div className="title">{this.props.book.title}</div>
-                <List>
-                    {this.props.signedIn === true ? listStudents : ""}
-                </List>
-            </Paper>
+            <div>
+                <Paper className="library-paper">
+                    <div className="title">{this.props.book.title}</div>
+                    <List>
+                        {this.props.signedIn === true ? listStudents : ""}
+                    </List>
+                </Paper>
+            </div>
         );
     }
 };

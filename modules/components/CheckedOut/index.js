@@ -60,11 +60,8 @@ class CheckedOut extends React.Component {
     
     render() {
 
-        //remove container div to make each book paper the same size
         let listBooks = this.state.books.map(book =>
-            <div key={book.book_id}>
-                <CheckedOutBook book={book} signedIn={this.props.signedIn}/>
-            </div>
+            <CheckedOutBook key={book.book_id} book={book} signedIn={this.props.signedIn}/>
         );
         
         return (
@@ -74,10 +71,10 @@ class CheckedOut extends React.Component {
                         <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)} hintText={this.props.signedIn === true ? "Enter a partial title or student name" : "Enter a partial title"}/>
                         <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={true}/>
                     </div>
-                    <div className="paper-container">
+                    <div className="flex paper-container">
                         {listBooks}
                     </div>
-                    <div className="flex">
+                    <div className="flex justify-center">
                         <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={false}/>
                     </div>
                 </div>

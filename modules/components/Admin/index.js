@@ -62,40 +62,28 @@ class Admin extends React.Component {
             <MuiThemeProvider>
                 <div className="admin">
                     {this.props.adminStatus === false ? 
-                        <p className="paper-container">You do not have access to this page.</p> :
+                        <p className="flex paper-container">You do not have access to this page.</p> :
                         <Tabs
                             className="tab-container"
                             contentContainerClassName="tab-content"
                             tabItemContainerStyle={tabStyle}
                             inkBarStyle={inkStyle}>
                             <Tab label="Users">
-                                <div className="paper-container">
-                                    <div>
-                                        <AddUser/>
-                                    </div>
-                                    <div>
-                                        <ChangePassword/>
-                                    </div>
+                                <div className="flex paper-container">
+                                    <AddUser/>
+                                    <ChangePassword/>
                                 </div>
                             </Tab>
                             <Tab label="Books">
-                                <div className="paper-container">
-                                    <div>
-                                        <AddBook findBooks={this.findBooks.bind(this)}/>
-                                    </div>
-                                    <div>
-                                        <UpdateBook books={this.state.books} findBooks={this.findBooks.bind(this)}/>
-                                    </div>
+                                <div className="flex paper-container">
+                                    <AddBook findBooks={this.findBooks.bind(this)}/>
+                                    <UpdateBook books={this.state.books} findBooks={this.findBooks.bind(this)}/>
                                 </div>
                             </Tab>
                             <Tab label="Students">
-                                <div className="paper-container">
-                                    <div>
-                                        <AddStudent findStudents={this.findStudents.bind(this)}/>
-                                    </div>
-                                    <div>
-                                        <UpdateStudent students={this.state.students} findStudents={this.findStudents.bind(this)}/>
-                                    </div>
+                                <div className="flex paper-container">
+                                    <AddStudent findStudents={this.findStudents.bind(this)}/>
+                                    <UpdateStudent students={this.state.students} findStudents={this.findStudents.bind(this)}/>
                                 </div>
                             </Tab>
                         </Tabs>

@@ -78,7 +78,7 @@ class Home extends React.Component {
                         <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={true}/>
                     </div>
                     <BookList books={this.state.books} students={this.state.students} total={this.state.total} signedIn={this.props.signedIn} onSearchKeyChange={this.searchKeyChangeHandler.bind(this)}/>
-                    <div className="flex">
+                    <div className="flex justify-center">
                         <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={false}/>
                     </div>
                 </div>

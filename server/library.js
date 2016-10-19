@@ -70,12 +70,12 @@ let findAllStudents = (req, res, next) => { //finds all students
     if (active == "only active") { //gets active students only
         sql = "SELECT * FROM students WHERE active IS TRUE ORDER BY SUBSTRING(name, '([^[:space:]]+)(?:,|$)')";
     }
-    else if (active == "only active + total") { //get active students plus how many books they have/what books they have
+    else if (active == "only active + books") { //get active students plus how many books they have/what books they have
         sql = "SELECT s.id, s.class, s.name, " +
                 "CASE WHEN (SELECT COUNT(*) FROM checked_out c WHERE c.date_in IS NULL) = 0 " +
                 "THEN 0 ELSE (SELECT COUNT(*) FROM checked_out c WHERE s.id = c.student_id AND c.date_in IS NULL) END AS total_out, " +
                 "ARRAY(SELECT DISTINCT b.title FROM books b, checked_out c WHERE s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL) AS books_out " +
-                "FROM students s GROUP BY s.name, s.class, s.id ORDER BY s.class, SUBSTRING(s.name, '([^[:space:]]+)(?:,|$)')";
+                "FROM students s WHERE active IS TRUE GROUP BY s.name, s.class, s.id ORDER BY s.class, SUBSTRING(s.name, '([^[:space:]]+)(?:,|$)')";
     }
     else { //gets all students regardless of active status
         sql = "SELECT * FROM students ORDER BY SUBSTRING(name, '([^[:space:]]+)(?:,|$)')";

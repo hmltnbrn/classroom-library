@@ -53,8 +53,6 @@ class AddBook extends React.Component {
     handleAddBook() {
         this.state.title === "" ? this.setState({titleStatus: "Required field"}) : this.setState({titleStatus: false});
         this.state.author === "" ? this.setState({authorStatus: "Required field"}) : this.setState({authorStatus: false});
-        this.state.genre === "" ? this.setState({genreStatus: "Required field"}) : this.setState({genreStatus: false});
-        this.state.level === "" ? this.setState({levelStatus: "Required field"}) : this.setState({levelStatus: false});
 
         if(this.state.numberIn === "") {
             this.setState({numberInStatus: "Required field"});
@@ -66,7 +64,7 @@ class AddBook extends React.Component {
             this.setState({numberInStatus: false});
         }
 
-        if (this.state.title !== "" && this.state.author !== "" && this.state.genre !== "" && this.state.level !== "" && this.state.numberIn > 0) {
+        if (this.state.title !== "" && this.state.author !== "" && this.state.numberIn > 0 && this.state.numberIn !== "") {
             this.addBook();
         }
     }
@@ -119,65 +117,70 @@ class AddBook extends React.Component {
     render() {
         
         return (
-            <Paper className="admin-paper">
-                <div className="title">Create New Book</div>
-                <div className="flex flex-column">
-                    <TextField
-                        hintText="Enter Title (e.g., 1984)"
-                        floatingLabelText="Title"
-                        errorText={this.state.titleStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.title}
-                        fullWidth={true}
-                        onChange={this.handleTitleChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Author (e.g., George Orwell)"
-                        floatingLabelText="Author"
-                        errorText={this.state.authorStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.author}
-                        fullWidth={true}
-                        onChange={this.handleAuthorChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Genre (e.g., Classics)"
-                        floatingLabelText="Genre"
-                        errorText={this.state.genreStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.genre}
-                        fullWidth={true}
-                        onChange={this.handleGenreChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Reading Level (e.g., Z)"
-                        floatingLabelText="Reading Level"
-                        errorText={this.state.levelStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.level}
-                        fullWidth={true}
-                        onChange={this.handleLevelChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Number of Books (e.g., 2)"
-                        floatingLabelText="Number of Books"
-                        type="number"
-                        min="0"
-                        step="1" 
-                        errorText={this.state.numberInStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.numberIn}
-                        fullWidth={true}
-                        onChange={this.handleNumberInChange.bind(this)}/><br />
-                </div>
-                <div className="flex">
-                    <FlatButton
-                        label="Clear"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleClear.bind(this)}/>
-                    <FlatButton
-                        label="Add Book"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleAddBook.bind(this)}/>
-                </div>
+            <div>
+                <Paper className="admin-paper">
+                    <div className="title">Create New Book</div>
+                    <div className="flex flex-column align-center">
+                        <TextField
+                            hintText="Enter Title (e.g., 1984)"
+                            floatingLabelText="Title *"
+                            errorText={this.state.titleStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.title}
+                            fullWidth={true}
+                            onChange={this.handleTitleChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Author (e.g., George Orwell)"
+                            floatingLabelText="Author *"
+                            errorText={this.state.authorStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.author}
+                            fullWidth={true}
+                            onChange={this.handleAuthorChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Genre (e.g., Classics)"
+                            floatingLabelText="Genre"
+                            errorText={this.state.genreStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.genre}
+                            fullWidth={true}
+                            onChange={this.handleGenreChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Reading Level (e.g., Z)"
+                            floatingLabelText="Reading Level"
+                            errorText={this.state.levelStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.level}
+                            fullWidth={true}
+                            onChange={this.handleLevelChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Number of Books (e.g., 2)"
+                            floatingLabelText="Number of Books *"
+                            type="number"
+                            min="0"
+                            step="1" 
+                            errorText={this.state.numberInStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.numberIn}
+                            fullWidth={true}
+                            onChange={this.handleNumberInChange.bind(this)}/><br />
+                    </div>
+                    <div className="flex justify-center">
+                        <FlatButton
+                            label="Clear"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleClear.bind(this)}/>
+                        <FlatButton
+                            label="Add Book"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleAddBook.bind(this)}/>
+                    </div>
+                    <div className="flex justify-start">
+                        <p className="required">* required field</p>
+                    </div>
+                </Paper>
                 <Snackbar
                     open={this.state.snackOpen}
                     message="Book added"
@@ -185,7 +188,7 @@ class AddBook extends React.Component {
                     onActionTouchTap={this.closeSnackbar.bind(this)}
                     autoHideDuration={4000}
                     onRequestClose={this.closeSnackbar.bind(this)}/>
-            </Paper>
+            </div>
         );
     }
 };

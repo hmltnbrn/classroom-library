@@ -110,61 +110,69 @@ class UpdateStudent extends React.Component {
         };
         
         return (
-            <Paper className="admin-paper">
-                <div className="title">Update Student</div>
-                <div className="flex flex-column update-textfield">
-                    <AutoComplete
-                        ref={"autocomplete"}
-                        floatingLabelText="Search Existing Students"
-                        hintText="Enter Name (e.g., Brian Hamilton)"
-                        filter={AutoComplete.caseInsensitiveFilter}
-                        dataSource={this.props.students}
-                        dataSourceConfig={dataSourceConfig}
-                        maxSearchResults={5}
-                        fullWidth={true}
-                        onNewRequest={this.handleNewRequest.bind(this)}
-                        onUpdateInput={this.handleUpdateInput.bind(this)}/><br />
-                    <FlatButton
-                        label="Get Student Info"
-                        type="submit"
-                        primary={true}
-                        disabled={this.state.studentId == null ? true : false}
-                        onTouchTap={this.findStudentById.bind(this)}/>
-                    <TextField
-                        hintText="Enter Name (e.g., Brian Hamilton)"
-                        floatingLabelText="Name"
-                        errorText={this.state.nameStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.name}
-                        fullWidth={true}
-                        onChange={this.handleNameChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Class (e.g., 601)"
-                        floatingLabelText="Class"
-                        errorText={this.state.classStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.class}
-                        fullWidth={true}
-                        onChange={this.handleClassChange.bind(this)}/><br />
-                </div>
-                <div>
-                    <Checkbox
-                        label="Active"
-                        checked={this.state.active}
-                        onCheck={this.handleCheck.bind(this)}/><br />
-                </div>
-                <div className="flex">
-                    <FlatButton
-                        label="Clear"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleClear.bind(this)}/>
-                    <FlatButton
-                        label="Update Student"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleUpdateStudent.bind(this)}/>
-                </div>
+            <div>
+                <Paper className="admin-paper">
+                    <div className="title">Update Student</div>
+                    <div className="flex flex-column align-center update-textfield">
+                        <AutoComplete
+                            ref={"autocomplete"}
+                            floatingLabelText="Search All Students"
+                            hintText="Enter Name (e.g., Brian Hamilton)"
+                            filter={AutoComplete.caseInsensitiveFilter}
+                            dataSource={this.props.students}
+                            dataSourceConfig={dataSourceConfig}
+                            maxSearchResults={5}
+                            fullWidth={true}
+                            onNewRequest={this.handleNewRequest.bind(this)}
+                            onUpdateInput={this.handleUpdateInput.bind(this)}/><br />
+                        <FlatButton
+                            label="Get Student Info"
+                            type="submit"
+                            primary={true}
+                            disabled={this.state.studentId == null ? true : false}
+                            onTouchTap={this.findStudentById.bind(this)}/>
+                        <TextField
+                            hintText="Enter Name (e.g., Brian Hamilton)"
+                            floatingLabelText="Name *"
+                            errorText={this.state.nameStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.name}
+                            fullWidth={true}
+                            onChange={this.handleNameChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Class (e.g., 601)"
+                            floatingLabelText="Class *"
+                            errorText={this.state.classStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.class}
+                            fullWidth={true}
+                            onChange={this.handleClassChange.bind(this)}/><br />
+                    </div>
+                    <div>
+                        <Checkbox
+                            label="Active **"
+                            checked={this.state.active}
+                            onCheck={this.handleCheck.bind(this)}/><br />
+                    </div>
+                    <div className="flex justify-center">
+                        <FlatButton
+                            label="Clear"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleClear.bind(this)}/>
+                        <FlatButton
+                            label="Update Student"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleUpdateStudent.bind(this)}/>
+                    </div>
+                    <div className="flex justify-start">
+                        <p className="required">* required field</p>
+                    </div>
+                    <div className="flex justify-start">
+                        <p className="required">** active students appear on students page and can check books out</p>
+                    </div>
+                </Paper>
                 <Snackbar
                     open={this.state.snackOpen}
                     message="Student updated"
@@ -172,7 +180,7 @@ class UpdateStudent extends React.Component {
                     onActionTouchTap={this.closeSnackbar.bind(this)}
                     autoHideDuration={4000}
                     onRequestClose={this.closeSnackbar.bind(this)}/>
-            </Paper>
+            </div>
         );
     }
 };

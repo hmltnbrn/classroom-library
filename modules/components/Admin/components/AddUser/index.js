@@ -128,10 +128,6 @@ class AddUser extends React.Component {
                 onTouchTap={this.addUser.bind(this)}/>,
         ];
 
-        const dialogStyle = {
-            textAlign: "center"
-        };
-
         const contentStyle = {
             display: 'inline-block',
             width: 'auto',
@@ -141,62 +137,68 @@ class AddUser extends React.Component {
         };
         
         return (
-            <Paper className="admin-paper">
-                <div className="title">Create New Account</div>
-                <div className="flex flex-column add-user-textfield">
-                    <TextField
-                        hintText="Enter Username"
-                        floatingLabelText="Username"
-                        errorText={this.state.userStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.user}
-                        fullWidth={true}
-                        onChange={this.handleUserChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Password"
-                        floatingLabelText="Password"
-                        type="password"
-                        errorText={this.state.passStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.pass}
-                        fullWidth={true}
-                        onChange={this.handlePassChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Password"
-                        floatingLabelText="Confirm Password"
-                        type="password"
-                        errorText={this.state.passStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.passConf}
-                        fullWidth={true}
-                        onChange={this.handleConfirmPassChange.bind(this)}/><br />
-                </div>
-                <div>
-                    <RadioButtonGroup valueSelected={this.state.admin} defaultSelected="false" name="accountType" onChange={this.handleAdminCheck.bind(this)}>
-                        <RadioButton
-                            value="true"
-                            label="Teacher"/>
-                        <RadioButton
-                            value="false"
-                            label="Librarian"/>
-                    </RadioButtonGroup><br />
-                </div>
-                <div className="flex">
-                    <FlatButton
-                        label="Clear"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleClear.bind(this)}/>
-                    <FlatButton
-                        label="Add User"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.openDialog.bind(this)}/>
-                </div>
+            <div>
+                <Paper className="admin-paper">
+                    <div className="title">Create New Account</div>
+                    <div className="flex flex-column align-center add-user-textfield">
+                        <TextField
+                            hintText="Enter Username"
+                            floatingLabelText="Username *"
+                            errorText={this.state.userStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.user}
+                            fullWidth={true}
+                            onChange={this.handleUserChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Password"
+                            floatingLabelText="Password *"
+                            type="password"
+                            errorText={this.state.passStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.pass}
+                            fullWidth={true}
+                            onChange={this.handlePassChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Password"
+                            floatingLabelText="Confirm Password *"
+                            type="password"
+                            errorText={this.state.passStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.passConf}
+                            fullWidth={true}
+                            onChange={this.handleConfirmPassChange.bind(this)}/><br />
+                    </div>
+                    <div>
+                        <p className="account-type">Account Type *</p>
+                        <RadioButtonGroup valueSelected={this.state.admin} defaultSelected="false" name="accountType" onChange={this.handleAdminCheck.bind(this)}>
+                            <RadioButton
+                                value="true"
+                                label="Teacher"/>
+                            <RadioButton
+                                value="false"
+                                label="Librarian"/>
+                        </RadioButtonGroup><br />
+                    </div>
+                    <div className="flex justify-center">
+                        <FlatButton
+                            label="Clear"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleClear.bind(this)}/>
+                        <FlatButton
+                            label="Add User"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.openDialog.bind(this)}/>
+                    </div>
+                    <div className="flex justify-start">
+                        <p className="required">* required field</p>
+                    </div>
+                </Paper>
                 <Dialog
                     actions={actions}
                     modal={false}
-                    style={dialogStyle}
+                    style={{textAlign: "center"}}
                     contentStyle={contentStyle}
                     open={this.state.addUserOpen}
                     onRequestClose={this.closeDialog.bind(this)}
@@ -210,7 +212,7 @@ class AddUser extends React.Component {
                     onActionTouchTap={this.closeSnackbar.bind(this)}
                     autoHideDuration={4000}
                     onRequestClose={this.closeSnackbar.bind(this)}/>
-            </Paper>
+            </div>
         );
     }
 };

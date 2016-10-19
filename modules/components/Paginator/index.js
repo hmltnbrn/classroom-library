@@ -11,8 +11,8 @@ class Paginator extends React.Component {
         let page = pages > 0 ? this.props.page + "/" + pages : "0/0";
         
         return (
-            <div className="flex flex-column">
-                <div className="flex">
+            <div className="flex flex-column justify-center">
+                <div className="flex justify-center">
                     <IconButton
                         disabled={this.props.page <= 1 ? true : false}
                         onClick={this.props.onPrevious}>
@@ -24,7 +24,7 @@ class Paginator extends React.Component {
                         <ArrowForward/>
                     </IconButton>
                 </div>
-                <div>
+                <div className="flex justify-center">
                     {this.props.showTotals === true ? <span>{this.props.total} books • page {page}</span> : <span></span>}
                 </div>
             </div>

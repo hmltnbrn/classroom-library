@@ -94,8 +94,6 @@ class UpdateStudent extends React.Component {
     handleUpdateBook() {
         this.state.title === "" ? this.setState({titleStatus: "Required field"}) : this.setState({titleStatus: false});
         this.state.author === "" ? this.setState({authorStatus: "Required field"}) : this.setState({authorStatus: false});
-        this.state.genre === "" ? this.setState({genreStatus: "Required field"}) : this.setState({genreStatus: false});
-        this.state.level === "" ? this.setState({levelStatus: "Required field"}) : this.setState({levelStatus: false});
 
         if(this.state.numberIn === "") {
             this.setState({numberInStatus: "Required field"});
@@ -117,8 +115,8 @@ class UpdateStudent extends React.Component {
             this.setState({numberOutStatus: false});
         }
 
-        if (this.state.title !== "" && this.state.author !== "" && this.state.genre !== "" && 
-            this.state.level !== "" && this.state.numberIn >= 0 && this.state.numberOut >= 0) {
+        if (this.state.title !== "" && this.state.author !== "" && this.state.numberIn >= 0 
+            && this.state.numberOut >= 0 && this.state.numberIn !== "" && this.state.numberOut !== "") {
             this.updateBook();
         }
     }
@@ -177,100 +175,108 @@ class UpdateStudent extends React.Component {
         };
         
         return (
-            <Paper className="admin-paper">
-                <div className="title">Update Book</div>
-                <div className="flex flex-column update-textfield">
-                    <AutoComplete
-                        ref={"autocomplete"}
-                        floatingLabelText="Search Existing Books"
-                        hintText="Enter Title (e.g., 1984)"
-                        errorText={this.state.searchError}
-                        filter={AutoComplete.caseInsensitiveFilter}
-                        dataSource={this.props.books}
-                        dataSourceConfig={dataSourceConfig}
-                        maxSearchResults={5}
-                        fullWidth={true}
-                        onNewRequest={this.handleNewRequest.bind(this)}
-                        onUpdateInput={this.handleUpdateInput.bind(this)}/><br />
-                    <FlatButton
-                        label="Get Book Info"
-                        type="submit"
-                        primary={true}
-                        disabled={this.state.bookId == null ? true : false}
-                        onTouchTap={this.findBookById.bind(this)}/>
-                    <TextField
-                        hintText="Enter Title (e.g., 1984)"
-                        floatingLabelText="Title"
-                        errorText={this.state.titleStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.title}
-                        fullWidth={true}
-                        onChange={this.handleTitleChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Author (e.g., George Orwell)"
-                        floatingLabelText="Author"
-                        errorText={this.state.authorStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.author}
-                        fullWidth={true}
-                        onChange={this.handleAuthorChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Genre (e.g., Classics)"
-                        floatingLabelText="Genre"
-                        errorText={this.state.genreStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.genre}
-                        fullWidth={true}
-                        onChange={this.handleGenreChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Reading Level (e.g., Z)"
-                        floatingLabelText="Reading Level"
-                        errorText={this.state.levelStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.level}
-                        fullWidth={true}
-                        onChange={this.handleLevelChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Number of Books (e.g., 2)"
-                        floatingLabelText="Number of Books Checked In"
-                        type="number"
-                        min="0"
-                        step="1"
-                        errorText={this.state.numberInStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.numberIn}
-                        fullWidth={true}
-                        onChange={this.handleNumberInChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Number of Books (e.g., 2)"
-                        floatingLabelText="Number of Books Checked Out"
-                        type="number"
-                        min="0"
-                        step="1"
-                        errorText={this.state.numberOutStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.numberOut}
-                        fullWidth={true}
-                        onChange={this.handleNumberOutChange.bind(this)}/><br />
-                </div>
-                <div>
-                    <Checkbox
-                        label="Available"
-                        checked={this.state.available}
-                        onCheck={this.handleCheck.bind(this)}/><br />
-                </div>
-                <div className="flex">
-                    <FlatButton
-                        label="Clear"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleClear.bind(this)}/>
-                    <FlatButton
-                        label="Update Book"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleUpdateBook.bind(this)}/>
-                </div>
+            <div>
+                <Paper className="admin-paper">
+                    <div className="title">Update Book</div>
+                    <div className="flex flex-column align-center update-textfield">
+                        <AutoComplete
+                            ref={"autocomplete"}
+                            floatingLabelText="Search Existing Books"
+                            hintText="Enter Title (e.g., 1984)"
+                            errorText={this.state.searchError}
+                            filter={AutoComplete.caseInsensitiveFilter}
+                            dataSource={this.props.books}
+                            dataSourceConfig={dataSourceConfig}
+                            maxSearchResults={5}
+                            fullWidth={true}
+                            onNewRequest={this.handleNewRequest.bind(this)}
+                            onUpdateInput={this.handleUpdateInput.bind(this)}/><br />
+                        <FlatButton
+                            label="Get Book Info"
+                            type="submit"
+                            primary={true}
+                            disabled={this.state.bookId == null ? true : false}
+                            onTouchTap={this.findBookById.bind(this)}/>
+                        <TextField
+                            hintText="Enter Title (e.g., 1984)"
+                            floatingLabelText="Title *"
+                            errorText={this.state.titleStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.title}
+                            fullWidth={true}
+                            onChange={this.handleTitleChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Author (e.g., George Orwell)"
+                            floatingLabelText="Author *"
+                            errorText={this.state.authorStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.author}
+                            fullWidth={true}
+                            onChange={this.handleAuthorChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Genre (e.g., Classics)"
+                            floatingLabelText="Genre"
+                            errorText={this.state.genreStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.genre}
+                            fullWidth={true}
+                            onChange={this.handleGenreChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Reading Level (e.g., Z)"
+                            floatingLabelText="Reading Level"
+                            errorText={this.state.levelStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.level}
+                            fullWidth={true}
+                            onChange={this.handleLevelChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Number of Books (e.g., 2)"
+                            floatingLabelText="Number of Books Checked In *"
+                            type="number"
+                            min="0"
+                            step="1"
+                            errorText={this.state.numberInStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.numberIn}
+                            fullWidth={true}
+                            onChange={this.handleNumberInChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Number of Books (e.g., 2)"
+                            floatingLabelText="Number of Books Checked Out *"
+                            type="number"
+                            min="0"
+                            step="1"
+                            errorText={this.state.numberOutStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.numberOut}
+                            fullWidth={true}
+                            onChange={this.handleNumberOutChange.bind(this)}/><br />
+                    </div>
+                    <div>
+                        <Checkbox
+                            label="Available **"
+                            checked={this.state.available}
+                            onCheck={this.handleCheck.bind(this)}/><br />
+                    </div>
+                    <div className="flex justify-center">
+                        <FlatButton
+                            label="Clear"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleClear.bind(this)}/>
+                        <FlatButton
+                            label="Update Book"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleUpdateBook.bind(this)}/>
+                    </div>
+                    <div className="flex justify-start">
+                        <p className="required">* required field</p>
+                    </div>
+                    <div className="flex justify-start">
+                        <p className="required">** available books are listed in the library</p>
+                    </div>
+                </Paper>
                 <Snackbar
                     open={this.state.snackOpen}
                     message="Book updated"
@@ -278,7 +284,7 @@ class UpdateStudent extends React.Component {
                     onActionTouchTap={this.closeSnackbar.bind(this)}
                     autoHideDuration={4000}
                     onRequestClose={this.closeSnackbar.bind(this)}/>
-            </Paper>
+            </div>
         );
     }
 };

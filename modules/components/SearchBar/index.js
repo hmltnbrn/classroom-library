@@ -19,7 +19,7 @@ class SearchBar extends React.Component {
     render() {
 
         return (
-            <div className="flex">
+            <div className="flex justify-center">
                 <TextField
                     hintText={this.props.hintText}
                     value={this.props.searchKey}

@@ -71,6 +71,22 @@ passport.deserializeUser((id, done) => {
         })
 });
 
+// Adding CORS support
+app.all('*', function (req, res, next) {
+    // Set CORS headers
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST");
+    res.header("Access-Control-Allow-Headers", req.header('access-control-request-headers'));
+    res.header('Access-Control-Allow-Credentials', true);
+
+    if (req.method === 'OPTIONS') {
+        // CORS Preflight
+        res.send();
+    } else {
+        next();
+    }
+});
+
 app.get('/books', library.findAllBooks);
 app.get('/books/:id', library.findBookById);
 app.post('/booktitles', library.findAllBookTitles);

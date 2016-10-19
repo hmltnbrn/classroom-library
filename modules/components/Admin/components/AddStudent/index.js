@@ -77,38 +77,43 @@ class AddStudent extends React.Component {
     render() {
         
         return (
-            <Paper className="admin-paper">
-                <div className="title">Create New Student</div>
-                <div className="flex flex-column">
-                    <TextField
-                        hintText="Enter Name (e.g., Brian Hamilton)"
-                        floatingLabelText="Name"
-                        errorText={this.state.nameStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.name}
-                        fullWidth={true}
-                        onChange={this.handleNameChange.bind(this)}/>
-                    <TextField
-                        hintText="Enter Class (e.g., 601)"
-                        floatingLabelText="Class"
-                        errorText={this.state.classStatus}
-                        onKeyDown={this.handleKeyDown.bind(this)}
-                        value={this.state.class}
-                        fullWidth={true}
-                        onChange={this.handleClassChange.bind(this)}/><br />
-                </div>
-                <div className="flex">
-                    <FlatButton
-                        label="Clear"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleClear.bind(this)}/>
-                    <FlatButton
-                        label="Add Student"
-                        type="submit"
-                        primary={true}
-                        onTouchTap={this.handleAddStudent.bind(this)}/>
-                </div>
+            <div>
+                <Paper className="admin-paper">
+                    <div className="title">Create New Student</div>
+                    <div className="flex flex-column align-center">
+                        <TextField
+                            hintText="Enter Name (e.g., Brian Hamilton)"
+                            floatingLabelText="Name *"
+                            errorText={this.state.nameStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.name}
+                            fullWidth={true}
+                            onChange={this.handleNameChange.bind(this)}/>
+                        <TextField
+                            hintText="Enter Class (e.g., 601)"
+                            floatingLabelText="Class *"
+                            errorText={this.state.classStatus}
+                            onKeyDown={this.handleKeyDown.bind(this)}
+                            value={this.state.class}
+                            fullWidth={true}
+                            onChange={this.handleClassChange.bind(this)}/><br />
+                    </div>
+                    <div className="flex justify-center">
+                        <FlatButton
+                            label="Clear"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleClear.bind(this)}/>
+                        <FlatButton
+                            label="Add Student"
+                            type="submit"
+                            primary={true}
+                            onTouchTap={this.handleAddStudent.bind(this)}/>
+                    </div>
+                    <div className="flex justify-start">
+                        <p className="required">* required field</p>
+                    </div>
+                </Paper>
                 <Snackbar
                     open={this.state.snackOpen}
                     message="Student added"
@@ -116,7 +121,7 @@ class AddStudent extends React.Component {
                     onActionTouchTap={this.closeSnackbar.bind(this)}
                     autoHideDuration={4000}
                     onRequestClose={this.closeSnackbar.bind(this)}/>
-            </Paper>
+            </div>
         );
     }
 };
