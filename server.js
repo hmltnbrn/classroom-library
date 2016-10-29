@@ -90,8 +90,9 @@ app.all('*', function (req, res, next) {
 app.get('/books', library.findAllBooks);
 app.get('/books/:id', library.findBookById);
 app.post('/booktitles', library.findAllBookTitles);
-app.post('/students', library.findAllStudents);
+app.post('/allstudents', library.findAllStudents);
 app.post('/student', library.findStudentById);
+app.post('/studenthistory', library.findStudentHistoryById);
 app.post('/checkedout', library.findStudentsByBook);
 app.post('/checkedoutbooks', library.findStudentsByAllBooks);
 app.post('/checkout', library.checkOutBook);

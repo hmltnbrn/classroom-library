@@ -193,21 +193,27 @@ class Header extends React.Component {
                             style={menuItemStyle}>
                             Library
                         </MenuItem>
-                        <MenuItem
-                            onTouchTap={this.handleDrawerClose.bind(this)}
-                            containerElement={<Link to="/out" activeClassName="active"/>}
-                            leftIcon={<CheckCircle/>}
-                            style={menuItemStyle}>
-                            Checked Out Books
-                        </MenuItem>
-                        <MenuItem
-                            onTouchTap={this.handleDrawerClose.bind(this)}
-                            containerElement={<Link to="/students" activeClassName="active"/>}
-                            leftIcon={<AccountCircle />}
-                            style={menuItemStyle}>
-                            Students
-                        </MenuItem>
-                        {this.props.adminStatus === true ? 
+                        {this.props.signedIn === true ?
+                            <MenuItem
+                                onTouchTap={this.handleDrawerClose.bind(this)}
+                                containerElement={<Link to="/out" activeClassName="active"/>}
+                                leftIcon={<CheckCircle/>}
+                                style={menuItemStyle}>
+                                Checked Out Books
+                            </MenuItem> :
+                            <span></span>
+                        }
+                        {this.props.signedIn === true ?
+                            <MenuItem
+                                onTouchTap={this.handleDrawerClose.bind(this)}
+                                containerElement={<Link to="/students" activeClassName="active"/>}
+                                leftIcon={<AccountCircle />}
+                                style={menuItemStyle}>
+                                Students
+                            </MenuItem> :
+                            <span></span>
+                        }
+                        {this.props.adminStatus === true ?
                             <MenuItem
                                 onTouchTap={this.handleDrawerClose.bind(this)}
                                 containerElement={<Link to="/admin" activeClassName="active"/>}

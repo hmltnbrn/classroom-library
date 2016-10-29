@@ -19,7 +19,7 @@ class CheckedOutBook extends React.Component {
                 <Paper className="library-paper">
                     <div className="title">{this.props.book.title}</div>
                     <List>
-                        {this.props.signedIn === true ? listStudents : ""}
+                        {listStudents}
                     </List>
                 </Paper>
             </div>

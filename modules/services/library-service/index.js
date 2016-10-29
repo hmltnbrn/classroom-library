@@ -40,7 +40,7 @@ export let findAllStudents = (values) => {
             return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
         }).join('&');
     }
-    return request({method: "POST", url: baseURL + "/students", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
+    return request({method: "POST", url: baseURL + "/allstudents", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
         .then(data => data = JSON.parse(data));
 }
 
@@ -53,6 +53,18 @@ export let findStudentById = (values) => {
         }).join('&');
     }
     return request({method: "POST", url: baseURL + "/student", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
+        .then(data => data = JSON.parse(data));
+}
+
+export let findStudentHistoryById = (values) => {
+
+    let qs = "";
+    if (values) {
+        qs = Object.keys(values).map(key => {
+            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
+        }).join('&');
+    }
+    return request({method: "POST", url: baseURL + "/studenthistory", data: qs, headers: {"Content-type":"application/x-www-form-urlencoded"}})
         .then(data => data = JSON.parse(data));
 }
 

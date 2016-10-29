@@ -13,8 +13,8 @@ class CheckedOut extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            books: [],
             searchKey: "",
+            books: [],
             total: 0,
             page: 1
         }
@@ -22,7 +22,11 @@ class CheckedOut extends React.Component {
 
     componentDidMount() {
         this.props.setPageTitle("Checked Out Books");
-        this.findStudentsByAllBooks();
+        if (this.props.signedIn === true) this.findStudentsByAllBooks();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.signedIn === true && this.props.signedIn === false) this.findStudentsByAllBooks();
     }
 
     findStudentsByAllBooks() {
@@ -63,23 +67,32 @@ class CheckedOut extends React.Component {
         let listBooks = this.state.books.map(book =>
             <CheckedOutBook key={book.book_id} book={book} signedIn={this.props.signedIn}/>
         );
-        
-        return (
-            <MuiThemeProvider>
-                <div className="checked-out">
-                    <div className="flex flex-column">
-                        <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)} hintText={this.props.signedIn === true ? "Enter a partial title or student name" : "Enter a partial title"}/>
-                        <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={true}/>
+
+        if (this.props.signedIn === true) {
+            return (
+                <MuiThemeProvider>
+                    <div className="checked-out">
+                        <div className="flex flex-column">
+                            <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)} hintText={"Enter a partial title or student name"}/>
+                            <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={true}/>
+                        </div>
+                        <div className="flex flex-wrap">
+                            {listBooks}
+                        </div>
+                        <div className="flex justify-center">
+                            <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={false}/>
+                        </div>
                     </div>
-                    <div className="flex paper-container">
-                        {listBooks}
-                    </div>
-                    <div className="flex justify-center">
-                        <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={false}/>
-                    </div>
+                </MuiThemeProvider>
+            );
+        }
+        else {
+            return (
+                <div className="checked-out flex flex-column align-center">
+                    <p>Sign in to view this page.</p>
                 </div>
-            </MuiThemeProvider>
-        );
+            );
+        }
     }
 };
 

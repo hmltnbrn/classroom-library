@@ -39,7 +39,7 @@ class App extends React.Component {
     render() {
 
         return (
-            <div id="components">
+            <div className="components flex flex-column">
                 <Header signedIn={this.state.signedIn} adminStatus={this.state.adminStatus} pageTitle={this.state.pageTitle} username={this.state.username} session={this.session.bind(this)}/>
                 {this.props.children && React.cloneElement(this.props.children, {signedIn: this.state.signedIn, adminStatus: this.state.adminStatus, setPageTitle: this.setPageTitle.bind(this)})}
                 <Footer/>

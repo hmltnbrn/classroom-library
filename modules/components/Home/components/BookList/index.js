@@ -11,7 +11,7 @@ class BookList extends React.Component {
         );
         
         return (
-            <div className="flex paper-container">
+            <div className="flex flex-wrap">
                 {listBooks}
             </div>
         );

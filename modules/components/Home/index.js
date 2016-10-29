@@ -23,7 +23,11 @@ class Home extends React.Component {
     componentDidMount() {
         this.props.setPageTitle("Library");
         this.findBooks();
-        this.findStudents();
+        if (this.props.signedIn === true) this.findStudents();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.signedIn === true && this.props.signedIn === false) this.findStudents();
     }
 
     findBooks() {

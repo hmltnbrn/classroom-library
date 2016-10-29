@@ -66,23 +66,41 @@ let findAllStudents = (req, res, next) => { //finds all students
 
     let active = req.body.active;
     let sql = "";
+    let sql2 = "";
 
     if (active == "only active") { //gets active students only
         sql = "SELECT * FROM students WHERE active IS TRUE ORDER BY SUBSTRING(name, '([^[:space:]]+)(?:,|$)')";
     }
-    else if (active == "only active + books") { //get active students plus how many books they have/what books they have
+    else if (active == "all + books") { //get all students plus how many books they have/what books they have
         sql = "SELECT s.id, s.class, s.name, " +
                 "CASE WHEN (SELECT COUNT(*) FROM checked_out c WHERE c.date_in IS NULL) = 0 " +
                 "THEN 0 ELSE (SELECT COUNT(*) FROM checked_out c WHERE s.id = c.student_id AND c.date_in IS NULL) END AS total_out, " +
                 "ARRAY(SELECT DISTINCT b.title FROM books b, checked_out c WHERE s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL) AS books_out " +
                 "FROM students s WHERE active IS TRUE GROUP BY s.name, s.class, s.id ORDER BY s.class, SUBSTRING(s.name, '([^[:space:]]+)(?:,|$)')";
+        sql2 = "SELECT s.id, s.class, s.name, " +
+                "CASE WHEN (SELECT COUNT(*) FROM checked_out c WHERE c.date_in IS NULL) = 0 " +
+                "THEN 0 ELSE (SELECT COUNT(*) FROM checked_out c WHERE s.id = c.student_id AND c.date_in IS NULL) END AS total_out, " +
+                "ARRAY(SELECT DISTINCT b.title FROM books b, checked_out c WHERE s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL) AS books_out " +
+                "FROM students s WHERE active IS FALSE GROUP BY s.name, s.class, s.id ORDER BY s.class, SUBSTRING(s.name, '([^[:space:]]+)(?:,|$)')";
     }
     else { //gets all students regardless of active status
         sql = "SELECT * FROM students ORDER BY SUBSTRING(name, '([^[:space:]]+)(?:,|$)')";
     }
 
     db.query(sql, [])
-        .then(students => res.json({students}))
+        .then(students => {
+            if (sql2 === "") {
+                return res.json({"students": students});
+            }
+            else {
+                db.query(sql2, [])
+                    .then(inactive_students => {
+                        return res.json({"students": students, "inactive_students": inactive_students});
+                    })
+                    .catch(next);
+            }
+            
+        })
         .catch(next);
 };
 
@@ -91,6 +109,31 @@ let findStudentById = (req, res, next) => { //gets student info based on ID
 
     db.query(sql, [parseInt(req.body.studentId)])
         .then(student => res.json({student}))
+        .catch(next);
+};
+
+
+let findStudentHistoryById = (req, res, next) => { //gets student info based on ID
+    let sql = "SELECT name, class, active FROM students WHERE id = $1";
+    let sql2 = "SELECT c.id, c.book_id, b.title, b.level, c.date_out, c.date_in " +
+                "FROM books b, checked_out c " + 
+                "WHERE c.student_id = $1 AND b.id = c.book_id AND c.date_in IS NULL ORDER BY c.date_out DESC";
+    let sql3 = "SELECT c.id, c.book_id, b.title, b.level, c.date_out, c.date_in " +
+                "FROM books b, checked_out c " + 
+                "WHERE c.student_id = $1 AND b.id = c.book_id AND c.date_in IS NOT NULL ORDER BY c.date_in DESC";
+
+    db.query(sql, [parseInt(req.body.studentId)])
+        .then(student => {
+            db.query(sql2, [parseInt(req.body.studentId)])
+                .then(out_books => {
+                    db.query(sql3, [parseInt(req.body.studentId)])
+                        .then(in_books => {
+                            res.json({"student": student, "out_books": out_books, "in_books": in_books});
+                        })
+                        .catch(next);
+                    })
+                .catch(next);
+            })
         .catch(next);
 };
 
@@ -151,7 +194,7 @@ let findStudentsByAllBooks = (req, res, next) => { //gets books that are checked
 let checkOutBook = (req, res, next) => { //checks out a book
 
     let sql1 = "SELECT * FROM checked_out WHERE book_id = $1 AND student_id = $2 AND date_in IS NULL";
-    let sql2 = "INSERT INTO checked_out (book_id, student_id, date_out) VALUES ($1, $2, $3)";
+    let sql2 = "INSERT INTO checked_out (book_id, student_id, date_out) VALUES ($1, $2, CURRENT_TIMESTAMP)";
     let sql3 = "UPDATE books SET number_in = $1, number_out = $2 WHERE id = $3";
 
     db.query(sql1, [parseInt(req.body.bookId), parseInt(req.body.studentId)])
@@ -160,7 +203,7 @@ let checkOutBook = (req, res, next) => { //checks out a book
                 return res.json({"status": "Already has book"}); //returns if the student already has the book
             }
             else {
-                db.query(sql2, [parseInt(req.body.bookId), parseInt(req.body.studentId), new Date()])
+                db.query(sql2, [parseInt(req.body.bookId), parseInt(req.body.studentId)])
                     .then(() => {
                         db.query(sql3, [parseInt(req.body.numberIn), parseInt(req.body.numberOut), parseInt(req.body.bookId)])
                             .then(() => {
@@ -177,10 +220,10 @@ let checkOutBook = (req, res, next) => { //checks out a book
 
 let checkInBook = (req, res, next) => { //checks in a book
 
-    let sql1 = "UPDATE checked_out SET date_in = $1 WHERE book_id = $2 AND student_id = $3";
+    let sql1 = "UPDATE checked_out SET date_in = CURRENT_TIMESTAMP WHERE book_id = $1 AND student_id = $2 AND date_in IS NULL";
     let sql2 = "UPDATE books SET number_in = $1, number_out = $2 WHERE id = $3";
 
-    db.query(sql1, [new Date(), parseInt(req.body.bookId), parseInt(req.body.studentId)])
+    db.query(sql1, [parseInt(req.body.bookId), parseInt(req.body.studentId)])
         .then(() => {
             db.query(sql2, [parseInt(req.body.numberIn), parseInt(req.body.numberOut), parseInt(req.body.bookId)])
                 .then(res.redirect('back'))
@@ -302,6 +345,7 @@ exports.findAllBookTitles = findAllBookTitles;
 exports.findBookById = findBookById;
 exports.findAllStudents = findAllStudents;
 exports.findStudentById = findStudentById;
+exports.findStudentHistoryById = findStudentHistoryById;
 exports.findStudentsByBook = findStudentsByBook;
 exports.findStudentsByAllBooks = findStudentsByAllBooks;
 exports.checkOutBook = checkOutBook;
