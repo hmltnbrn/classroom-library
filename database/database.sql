@@ -6,7 +6,8 @@ CREATE TABLE books (
     level TEXT,
     number_in INTEGER,
     number_out INTEGER,
-    available BOOLEAN
+    available BOOLEAN,
+    UNIQUE (title, author)
 );
 
 CREATE TABLE students (
@@ -204,7 +205,6 @@ INSERT INTO books (title, author, genre, level, number_in, number_out, available
 ,('Dear America: A Coal Miner''s Bride: The Diary of Anetka Kaminska','Susan Campbell Bartoletti','Historical Fiction','UVW',2,0,'TRUE')
 ,('Dear America: A Light in the Storm: The Civil War Diary of Amelia Martin','Karen Hesse','Historical Fiction','UVW',1,0,'TRUE')
 ,('Dear America: A Picture of Freedom: The Diary of Clotee, a Slave Girl','Patricia C. Mckissack','Historical Fiction','UVW',1,0,'TRUE')
-,('Dear America: A Time for Courage: The Suffragette Diary of Kathleen Bowen','Kristina Gregory','Historical Fiction','UVW',1,0,'TRUE')
 ,('Dear America: A Time for Courage: The Suffragette Diary of Kathleen Bowen','Kathryn Lasky','Historical Fiction','UVW',1,0,'TRUE')
 ,('Dear America: Dreams in the Golden Country: The Diary of Zipporah Feldman, a Jewish Immigrant Girl','Kathryn Lasky','Historical Fiction','UVW',1,0,'TRUE')
 ,('Dear America: Early Sunday Morning: The Pearl Harbor Diary of Amber Billows','Barry Denenberg','Historical Fiction','UVW',1,0,'TRUE')

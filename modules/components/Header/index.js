@@ -7,14 +7,19 @@ import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui
 import TextField from 'material-ui/TextField';
 import FlatButton from 'material-ui/FlatButton';
 import Dialog from 'material-ui/Dialog';
+import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/Divider';
 import Drawer from 'material-ui/Drawer';
 import IconButton from 'material-ui/IconButton';
 import NavigationMenu from 'material-ui/svg-icons/navigation/menu';
 import LibraryBooks from 'material-ui/svg-icons/av/library-books';
 import CheckCircle from 'material-ui/svg-icons/action/check-circle';
+import Group from 'material-ui/svg-icons/social/group';
 import AccountCircle from 'material-ui/svg-icons/action/account-circle';
 import Settings from 'material-ui/svg-icons/action/settings';
+
+import { browserHistory } from 'react-router';
 
 import * as libraryService from './../../services/library-service';
 
@@ -107,8 +112,7 @@ class Header extends React.Component {
             display: 'inline-block',
             width: 'auto',
             maxWidth: 'none',
-            minWidth: 400,
-            minHeight: 400
+            minWidth: 400
         };
 
         const menuItemStyle = {
@@ -155,23 +159,28 @@ class Header extends React.Component {
                             <ToolbarTitle text={this.props.pageTitle} style={titleStyle}/>
                         </ToolbarGroup>
                         <ToolbarGroup lastChild={true} style={rightGroupStyle}>
-                            {this.props.username !== "" ? 
-                                <ToolbarTitle text={this.props.username} style={{color: white}}/> :
-                                <span></span>
-                            }
                             <ToolbarSeparator style={separatorStyle}/>
-                            {this.props.signedIn === false ? 
+                            {this.props.signedIn == false ? 
                                 <FlatButton
                                     label="Sign In"
                                     primary={true}
                                     onTouchTap={this.openDialog.bind(this)}
                                     style={buttonStyle}/> : 
-                                <FlatButton
-                                    label="Sign Out"
-                                    primary={true}
-                                    onTouchTap={this.signOut.bind(this)}
-                                    style={buttonStyle}/>
-                            }
+                                <IconMenu
+                                    iconButtonElement={<IconButton><AccountCircle color={white}/></IconButton>}
+                                    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                                    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                                    style={{marginLeft: 15, marginRight: 15}}
+                                >
+                                    <MenuItem primaryText={this.props.username} disabled={true} style={{cursor: 'auto'}}/>
+                                    <Divider />
+                                    {this.props.adminStatus === true ? 
+                                        <MenuItem primaryText="Admin" onTouchTap={()=>{browserHistory.push('/admin')}} /> :
+                                        <MenuItem></MenuItem>
+                                    }
+                                    <MenuItem primaryText="Sign Out" onTouchTap={this.signOut.bind(this)} />
+                                </IconMenu>
+                              }
                         </ToolbarGroup>
                     </Toolbar>
                     <Drawer
@@ -207,29 +216,19 @@ class Header extends React.Component {
                             <MenuItem
                                 onTouchTap={this.handleDrawerClose.bind(this)}
                                 containerElement={<Link to="/students" activeClassName="active"/>}
-                                leftIcon={<AccountCircle />}
+                                leftIcon={<Group />}
                                 style={menuItemStyle}>
                                 Students
                             </MenuItem> :
                             <span></span>
                         }
-                        {this.props.adminStatus === true ?
-                            <MenuItem
-                                onTouchTap={this.handleDrawerClose.bind(this)}
-                                containerElement={<Link to="/admin" activeClassName="active"/>}
-                                leftIcon={<Settings/>}
-                                style={menuItemStyle}>
-                                Admin
-                            </MenuItem> :
-                            <span></span>
-                        }
                     </Drawer>
                     <Dialog
-                        title="Sign In"
                         modal={false}
                         style={dialogStyle}
                         contentStyle={contentStyle}
                         open={this.state.signInOpen}
+                        autoScrollBodyContent={true}
                         onRequestClose={this.closeDialog.bind(this)}>
                         <TextField autoFocus
                             hintText="Enter Username"
