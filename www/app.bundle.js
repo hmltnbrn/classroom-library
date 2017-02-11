@@ -27808,8 +27808,7 @@
 	            var _this4 = this;
 	
 	            var dialogStyle = {
-	                textAlign: "center",
-	                paddingTop: 0
+	                textAlign: "center"
 	            };
 	
 	            var contentStyle = {
@@ -46834,7 +46833,7 @@
 	};
 	
 	var findAllBookTitles = exports.findAllBookTitles = function findAllBookTitles() {
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/booktitles" }).then(function (data) {
+	    return (0, _request2.default)({ method: "GET", url: baseURL + "/books/titles" }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46847,7 +46846,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/allstudents", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/students", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46873,7 +46872,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/studenthistory", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/student/history", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46886,7 +46885,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/checkout", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/book/checkout", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46899,7 +46898,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/checkin", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } });
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/book/checkin", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } });
 	};
 	
 	var findStudentsByBook = exports.findStudentsByBook = function findStudentsByBook(values) {
@@ -46910,7 +46909,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/checkedout", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/checkedout/book/students", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46923,7 +46922,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/checkedoutbooks", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/checkedout/books/students", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46936,19 +46935,19 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/signin", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/user/signin", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
 	
 	var signOut = exports.signOut = function signOut() {
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/signout" }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/user/signout" }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
 	
 	var isSignedIn = exports.isSignedIn = function isSignedIn() {
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/signed" }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/user/session" }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46961,7 +46960,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/register", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/user/register", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46974,7 +46973,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/changepassword", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/user/changepassword", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -46987,7 +46986,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/addbook", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/book/add", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -47000,7 +46999,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/updatebook", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } });
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/book/update", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } });
 	};
 	
 	var addStudent = exports.addStudent = function addStudent(values) {
@@ -47011,7 +47010,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/addstudent", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/student/add", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } }).then(function (data) {
 	        return data = JSON.parse(data);
 	    });
 	};
@@ -47024,7 +47023,7 @@
 	            return encodeURIComponent(key) + '=' + encodeURIComponent(values[key]);
 	        }).join('&');
 	    }
-	    return (0, _request2.default)({ method: "POST", url: baseURL + "/updatestudent", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } });
+	    return (0, _request2.default)({ method: "POST", url: baseURL + "/student/update", data: qs, headers: { "Content-type": "application/x-www-form-urlencoded" } });
 	};
 
 /***/ },

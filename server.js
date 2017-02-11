@@ -88,21 +88,21 @@ app.all('*', function (req, res, next) {
 });
 
 app.get('/books', library.findAllBooks);
+app.get('/books/titles', library.findAllBookTitles);
 app.get('/books/:id', library.findBookById);
-app.post('/booktitles', library.findAllBookTitles);
-app.post('/allstudents', library.findAllStudents);
+app.post('/students', library.findAllStudents);
 app.post('/student', library.findStudentById);
-app.post('/studenthistory', library.findStudentHistoryById);
-app.post('/checkedout', library.findStudentsByBook);
-app.post('/checkedoutbooks', library.findStudentsByAllBooks);
-app.post('/checkout', library.checkOutBook);
-app.post('/checkin', library.checkInBook);
-app.post('/register', library.register);
-app.post('/changepassword', library.changePassword);
-app.post('/addbook', library.addBook);
-app.post('/updatebook', library.updateBook);
-app.post('/addstudent', library.addStudent);
-app.post('/updatestudent', library.updateStudent);
+app.post('/student/history', library.findStudentHistoryById);
+app.post('/checkedout/book/students', library.findStudentsByBook);
+app.post('/checkedout/books/students', library.findStudentsByAllBooks);
+app.post('/book/checkout', library.checkOutBook);
+app.post('/book/checkin', library.checkInBook);
+app.post('/user/register', library.register);
+app.post('/user/changepassword', library.changePassword);
+app.post('/book/add', library.addBook);
+app.post('/book/update', library.updateBook);
+app.post('/student/add', library.addStudent);
+app.post('/student/update', library.updateStudent);
 
 function isLoggedIn(req, res, next) { //checks authentication status
     if (req.isAuthenticated())
@@ -111,7 +111,7 @@ function isLoggedIn(req, res, next) { //checks authentication status
     return res.json({status: false, admin: false, username: ""});
 }
 
-app.post('/signin', function (req, res, next) {
+app.post('/user/signin', function (req, res, next) {
     passport.authenticate('local', {session: true}, function(err, user, info) {
         if (err) { return res.json({status: "Unknown Error -- Contact Website Owner"}); }
         if (!user) { return res.json({status: "Incorrect username or password"}); }
@@ -122,12 +122,12 @@ app.post('/signin', function (req, res, next) {
     })(req, res, next);
 });
 
-app.post('/signout', function (req, res, next){
+app.post('/user/signout', function (req, res, next){
     req.logout();
     return res.json({status: false});
 });
 
-app.post('/signed', isLoggedIn, function (req, res, next) {
+app.post('/user/session', isLoggedIn, function (req, res, next) {
     return res.json({status: true, admin: req.user.admin, username: req.user.username});
 });
 

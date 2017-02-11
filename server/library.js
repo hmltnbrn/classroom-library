@@ -10,7 +10,7 @@ let createHash = (string) => crypto.createHash('sha256').update(string).digest('
 let escape = s => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
 
 let findAllBooks = (req, res, next) => { //finds all books with or without a search query
-    
+
     let pageSize = req.query.pageSize ? parseInt(req.query.pageSize) : 12,
         page = req.query.page ? parseInt(req.query.page) : 1,
         search = req.query.search,
@@ -168,7 +168,6 @@ let findStudentsByAllBooks = (req, res, next) => { //gets books that are checked
     }
 
     let where = whereParts.length > 0 ? ("WHERE " + whereParts.join(" AND ")) : "WHERE ";
-
 
     let countSql = "SELECT COUNT(DISTINCT b.title) from books b, students s, checked_out c " + where +
                     " s.id = c.student_id AND b.id = c.book_id AND c.date_in IS NULL";
