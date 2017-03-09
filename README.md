@@ -24,7 +24,7 @@ Credit to ccoenraets and his [beer explorer](https://github.com/ccoenraets/belgi
     npm install
     ```
 
-6. Open **server/config.js** and edit the databaseURL to be accurate. For a production server, you will want to set the environment variable (on Heroku, use config vars). If you're deploying on a web server, add **?ssl=true** to the end of the URL.
+6. Open **server/config.js** and edit the databaseURL to be accurate. For a production server, you will want to set the environment variable (on Heroku, use config vars). If you're deploying on a web server, add **?ssl=true** to the end of the URL (unless using config vars).
 
 7. Type and run the command below to build the Webpack files:
 

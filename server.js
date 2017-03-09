@@ -16,7 +16,9 @@ let express = require('express'),
 
 app.set('port', process.env.PORT || 8080); //sets port
 
-app.use(sslRedirect());
+if (process.env.NODE_ENV === 'production') {
+    app.use(sslRedirect());
+}
 
 app.use(compression());
 
