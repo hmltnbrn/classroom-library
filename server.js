@@ -5,6 +5,7 @@ let express = require('express'),
     path = require('path'),
     library = require('./server/library'),
     db = require('./server/pghelper'),
+    sslRedirect = require('heroku-ssl-redirect'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
@@ -14,6 +15,8 @@ let express = require('express'),
     app = express();
 
 app.set('port', process.env.PORT || 8080); //sets port
+
+app.use(sslRedirect());
 
 app.use(compression());
 

@@ -24,7 +24,7 @@ Credit to ccoenraets and his [beer explorer](https://github.com/ccoenraets/belgi
     npm install
     ```
 
-6. Open **server/config.js** and edit the databaseURL to be accurate. If using Heroku, add **?ssl=true** to the end of URL.
+6. Open **server/config.js** and edit the databaseURL to be accurate. For a production server, you will want to set the environment variable (on Heroku, use config vars). If you're deploying on a web server, add **?ssl=true** to the end of the URL.
 
 7. Type and run the command below to build the Webpack files:
 
@@ -60,6 +60,8 @@ Use the [admin](http://localhost:8080/admin) page to change passwords and add ne
 5. It's designed to always require a sign in to see student's names and to check out/in books.
 
 6. Signing in creates a browser session, allowing for refreshing the page and remaining signed in. Restart the server to reinitialize it.
+
+7. The heroku-ssl-redirect module is included, but will only do anything with proper SSL certificates in use on Heroku.
 
 ---
 
