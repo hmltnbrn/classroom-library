@@ -30,7 +30,7 @@ let findAllBooks = (req, res, next) => { //finds all books with or without a sea
 
     let sql = "SELECT id, title, author, genre, level, number_in, number_out, available " +
                 "FROM books " + where +
-                " ORDER BY title LIMIT $" + (values.length + 1) + " OFFSET $" +  + (values.length + 2);
+                " ORDER BY title LIMIT $" + (values.length + 1) + " OFFSET $" + (values.length + 2);
 
     db.query(countSql, values)
         .then(result => {
@@ -271,7 +271,7 @@ let changePassword = (req, res, next) => { //changes password for a user
             else {
                 db.query(sql2, [hashedPassword, salt, req.body.username])
                     .then(() => {
-                        return res.json({"status": false})
+                        return res.json({"status": false});
                     })
                     .catch(next);
             }
