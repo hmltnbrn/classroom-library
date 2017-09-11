@@ -24,14 +24,14 @@ app.use(compression());
 
 app.use('/', express.static(__dirname + '/www'));
 
-app.use(cookieParser('librarian'));
+app.use(cookieParser(process.env.COOKIE_SECRET || 'library'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.set('trust proxy', 1);
 app.use(session({
-    secret: 'librarian',
+    secret: process.env.COOKIE_SECRET || 'library',
     resave: true,
     saveUninitialized: true
 }));
