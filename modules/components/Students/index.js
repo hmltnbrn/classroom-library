@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DocumentTitle from 'react-document-title';
 import Paper from 'material-ui/Paper';
 import {Table, TableBody, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import {Tabs, Tab} from 'material-ui/Tabs';
@@ -101,7 +101,7 @@ class Students extends React.Component {
 
         if (this.props.signedIn === true) {
             return (
-                <MuiThemeProvider>
+                <DocumentTitle title="Library | Students">
                     <div className="students">
                         <Tabs
                             className="tab-container"
@@ -131,14 +131,16 @@ class Students extends React.Component {
                             </Tab>
                         </Tabs>
                     </div>
-                </MuiThemeProvider>
+                </DocumentTitle>
             );
         }
         else {
             return (
-                <div className="students flex flex-column align-center">
-                    <p>Sign in to view this page.</p>
-                </div>
+                <DocumentTitle title="Library | Students">
+                    <div className="students flex flex-column align-center">
+                        <p>Sign in to view this page.</p>
+                    </div>
+                </DocumentTitle>
             );
         }
     }

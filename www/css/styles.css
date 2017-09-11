@@ -50,16 +50,23 @@ body {
 
 .footer {
   width: 100%;
-  padding-top: 50px;
-  padding-bottom: 35px;
-  padding-left: 2.5%;
-  padding-right: 10%;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+  background-color: #FFFFFF;
 }
 
-.horiz-rule {
-  height: 1px;
-  width: 60%;
-  background-color: black;
+.footer p {
+  margin: 0;
+  color: #4F4F4F;
+}
+
+.footer-name {
+  font-size: 15px;
+}
+
+.footer-repo {
+  font-size: 12px;
 }
 
 .error-404 {

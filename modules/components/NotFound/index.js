@@ -1,5 +1,5 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DocumentTitle from 'react-document-title';
 
 class NotFound extends React.Component {
 
@@ -10,12 +10,12 @@ class NotFound extends React.Component {
     render() {
         
         return (
-            <MuiThemeProvider>
+            <DocumentTitle title="Library | Not Found">
                 <div className="not-found">
                     <p className="error-404 mono">404: Page Not Found</p>
                     <img src="images/squidward_frown.png" className="error-404-img" alt="Awwwww"/>
                 </div>
-            </MuiThemeProvider>
+            </DocumentTitle>
         );
     }
 };

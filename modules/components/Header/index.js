@@ -1,7 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import {cyan500, white} from 'material-ui/styles/colors';
+import {blue500, white} from 'material-ui/styles/colors';
 import AppBar from 'material-ui/AppBar';
 import {Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle} from 'material-ui/Toolbar';
 import TextField from 'material-ui/TextField';
@@ -120,7 +119,7 @@ class Header extends React.Component {
         };
 
         const toolStyle = {
-            backgroundColor: cyan500,
+            backgroundColor: blue500,
             height: 64
         };
 
@@ -149,108 +148,106 @@ class Header extends React.Component {
         };
 
         return (
-            <MuiThemeProvider>
-                <div className="header">
-                    <Toolbar style={toolStyle}>
-                        <ToolbarGroup style={leftGroupStyle}>
-                            <IconButton touch={true} onTouchTap={this.handleDrawerOpen.bind(this)}>
-                                <NavigationMenu color={white} />
-                            </IconButton>
-                            <ToolbarTitle text={this.props.pageTitle} style={titleStyle}/>
-                        </ToolbarGroup>
-                        <ToolbarGroup lastChild={true} style={rightGroupStyle}>
-                            <ToolbarSeparator style={separatorStyle}/>
-                            {this.props.signedIn == false ? 
-                                <FlatButton
-                                    label="Sign In"
-                                    primary={true}
-                                    onTouchTap={this.openDialog.bind(this)}
-                                    style={buttonStyle}/> : 
-                                <IconMenu
-                                    iconButtonElement={<IconButton><AccountCircle color={white}/></IconButton>}
-                                    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
-                                    targetOrigin={{horizontal: 'right', vertical: 'top'}}
-                                    style={{marginLeft: 15, marginRight: 15}}
-                                >
-                                    <MenuItem primaryText={this.props.username} disabled={true} style={{cursor: 'auto'}}/>
-                                    <Divider />
-                                    {this.props.adminStatus === true ? 
-                                        <MenuItem primaryText="Admin" onTouchTap={()=>{browserHistory.push('/admin')}} /> :
-                                        <MenuItem></MenuItem>
-                                    }
-                                    <MenuItem primaryText="Sign Out" onTouchTap={this.signOut.bind(this)} />
-                                </IconMenu>
-                              }
-                        </ToolbarGroup>
-                    </Toolbar>
-                    <Drawer
-                        docked={false}
-                        open={this.state.drawer}
-                        onRequestChange={(drawer) => this.setState({drawer})}
-                    >
-                        <AppBar
-                            title="Pages"
-                            zDepth={0}
-                            iconElementLeft={
-                            <IconButton touch={true} onTouchTap={this.handleDrawerClose.bind(this)}>
-                                <NavigationMenu color={white} />
-                            </IconButton>}/>
+            <div className="header">
+                <Toolbar style={toolStyle}>
+                    <ToolbarGroup style={leftGroupStyle}>
+                        <IconButton touch={true} onTouchTap={this.handleDrawerOpen.bind(this)}>
+                            <NavigationMenu color={white} />
+                        </IconButton>
+                        <ToolbarTitle text={this.props.pageTitle} style={titleStyle}/>
+                    </ToolbarGroup>
+                    <ToolbarGroup lastChild={true} style={rightGroupStyle}>
+                        <ToolbarSeparator style={separatorStyle}/>
+                        {this.props.signedIn == false ? 
+                            <FlatButton
+                                label="Sign In"
+                                primary={true}
+                                onTouchTap={this.openDialog.bind(this)}
+                                style={buttonStyle}/> : 
+                            <IconMenu
+                                iconButtonElement={<IconButton><AccountCircle color={white}/></IconButton>}
+                                anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                                targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                                style={{marginLeft: 15, marginRight: 15}}
+                            >
+                                <MenuItem primaryText={this.props.username} disabled={true} style={{cursor: 'auto'}}/>
+                                <Divider />
+                                {this.props.adminStatus === true ? 
+                                    <MenuItem primaryText="Admin" onTouchTap={()=>{browserHistory.push('/admin')}} /> :
+                                    <MenuItem></MenuItem>
+                                }
+                                <MenuItem primaryText="Sign Out" onTouchTap={this.signOut.bind(this)} />
+                            </IconMenu>
+                          }
+                    </ToolbarGroup>
+                </Toolbar>
+                <Drawer
+                    docked={false}
+                    open={this.state.drawer}
+                    onRequestChange={(drawer) => this.setState({drawer})}
+                >
+                    <AppBar
+                        title="Pages"
+                        zDepth={0}
+                        iconElementLeft={
+                        <IconButton touch={true} onTouchTap={this.handleDrawerClose.bind(this)}>
+                            <NavigationMenu color={white} />
+                        </IconButton>}/>
+                    <MenuItem
+                        onTouchTap={this.handleDrawerClose.bind(this)}
+                        containerElement={<Link to="/" onlyActiveOnIndex/>}
+                        leftIcon={<LibraryBooks/>}
+                        style={menuItemStyle}>
+                        Library
+                    </MenuItem>
+                    {this.props.signedIn === true ?
                         <MenuItem
                             onTouchTap={this.handleDrawerClose.bind(this)}
-                            containerElement={<Link to="/" onlyActiveOnIndex/>}
-                            leftIcon={<LibraryBooks/>}
+                            containerElement={<Link to="/out" activeClassName="active"/>}
+                            leftIcon={<CheckCircle/>}
                             style={menuItemStyle}>
-                            Library
-                        </MenuItem>
-                        {this.props.signedIn === true ?
-                            <MenuItem
-                                onTouchTap={this.handleDrawerClose.bind(this)}
-                                containerElement={<Link to="/out" activeClassName="active"/>}
-                                leftIcon={<CheckCircle/>}
-                                style={menuItemStyle}>
-                                Checked Out Books
-                            </MenuItem> :
-                            <span></span>
-                        }
-                        {this.props.signedIn === true ?
-                            <MenuItem
-                                onTouchTap={this.handleDrawerClose.bind(this)}
-                                containerElement={<Link to="/students" activeClassName="active"/>}
-                                leftIcon={<Group />}
-                                style={menuItemStyle}>
-                                Students
-                            </MenuItem> :
-                            <span></span>
-                        }
-                    </Drawer>
-                    <Dialog
-                        modal={false}
-                        style={dialogStyle}
-                        contentStyle={contentStyle}
-                        open={this.state.signInOpen}
-                        autoScrollBodyContent={true}
-                        onRequestClose={this.closeDialog.bind(this)}>
-                        <TextField autoFocus
-                            hintText="Enter Username"
-                            floatingLabelText="Username"
-                            errorText={this.state.status}
-                            onKeyDown={this.handleKeyDown.bind(this)}
-                            onChange={this.handleUserChange.bind(this)}/><br />
-                        <TextField
-                            hintText="Enter Password"
-                            floatingLabelText="Password"
-                            type="password"
-                            errorText={this.state.status}
-                            onKeyDown={this.handleKeyDown.bind(this)}
-                            onChange={this.handlePassChange.bind(this)}/><br />
-                        <FlatButton
-                            label="Sign In"
-                            type="submit"
-                            primary={true}
-                            onTouchTap={this.signIn.bind(this)}/>
-                    </Dialog>
-                </div>
-            </MuiThemeProvider>
+                            Checked Out Books
+                        </MenuItem> :
+                        <span></span>
+                    }
+                    {this.props.signedIn === true ?
+                        <MenuItem
+                            onTouchTap={this.handleDrawerClose.bind(this)}
+                            containerElement={<Link to="/students" activeClassName="active"/>}
+                            leftIcon={<Group />}
+                            style={menuItemStyle}>
+                            Students
+                        </MenuItem> :
+                        <span></span>
+                    }
+                </Drawer>
+                <Dialog
+                    modal={false}
+                    style={dialogStyle}
+                    contentStyle={contentStyle}
+                    open={this.state.signInOpen}
+                    autoScrollBodyContent={true}
+                    onRequestClose={this.closeDialog.bind(this)}>
+                    <TextField autoFocus
+                        hintText="Enter Username"
+                        floatingLabelText="Username"
+                        errorText={this.state.status}
+                        onKeyDown={this.handleKeyDown.bind(this)}
+                        onChange={this.handleUserChange.bind(this)}/><br />
+                    <TextField
+                        hintText="Enter Password"
+                        floatingLabelText="Password"
+                        type="password"
+                        errorText={this.state.status}
+                        onKeyDown={this.handleKeyDown.bind(this)}
+                        onChange={this.handlePassChange.bind(this)}/><br />
+                    <FlatButton
+                        label="Sign In"
+                        type="submit"
+                        primary={true}
+                        onTouchTap={this.signIn.bind(this)}/>
+                </Dialog>
+            </div>
         );
     }
 };

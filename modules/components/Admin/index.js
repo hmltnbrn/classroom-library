@@ -1,5 +1,5 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DocumentTitle from 'react-document-title';
 import {Tabs, Tab} from 'material-ui/Tabs';
 
 import AddUser from './components/AddUser';
@@ -69,7 +69,7 @@ class Admin extends React.Component {
 
         if (this.props.adminStatus === true) {
             return (
-                <MuiThemeProvider>
+                <DocumentTitle title="Library | Admin">
                     <div className="admin">
                         <Tabs
                             className="tab-container"
@@ -96,14 +96,16 @@ class Admin extends React.Component {
                             </Tab>
                         </Tabs>
                     </div>
-                </MuiThemeProvider>
+                </DocumentTitle>
             );
         }
         else {
             return (
-                <div className="admin flex flex-column align-center">
-                    <p>You do not have access to this page.</p>
-                </div>
+                <DocumentTitle title="Library | Admin">
+                    <div className="admin flex flex-column align-center">
+                        <p>You do not have access to this page.</p>
+                    </div>
+                </DocumentTitle>
             );
         }
     }

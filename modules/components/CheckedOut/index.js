@@ -1,5 +1,5 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DocumentTitle from 'react-document-title';
 import FlatButton from 'material-ui/FlatButton';
 
 import SearchBar from './../SearchBar';
@@ -70,7 +70,7 @@ class CheckedOut extends React.Component {
 
         if (this.props.signedIn === true) {
             return (
-                <MuiThemeProvider>
+                <DocumentTitle title="Library | Checked Out">
                     <div className="checked-out">
                         <div className="flex flex-column">
                             <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)} hintText={"Enter a partial title or student name"}/>
@@ -83,14 +83,16 @@ class CheckedOut extends React.Component {
                             <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={false}/>
                         </div>
                     </div>
-                </MuiThemeProvider>
+                </DocumentTitle>
             );
         }
         else {
             return (
-                <div className="checked-out flex flex-column align-center">
-                    <p>Sign in to view this page.</p>
-                </div>
+                <DocumentTitle title="Library | Checked Out">
+                    <div className="checked-out flex flex-column align-center">
+                        <p>Sign in to view this page.</p>
+                    </div>
+                </DocumentTitle>
             );
         }
     }

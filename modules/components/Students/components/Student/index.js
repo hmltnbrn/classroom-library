@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from 'react-router';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DocumentTitle from 'react-document-title';
 import Paper from 'material-ui/Paper';
 import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
 import Divider from 'material-ui/Divider';
@@ -82,7 +82,7 @@ class Student extends React.Component {
 
         if (this.props.signedIn === true) {
             return (
-                <MuiThemeProvider>
+                <DocumentTitle title={"Library | " + this.state.student.name}>
                     <div className="students flex flex-column align-center">
                         <div className="student-active" style={this.state.student.active === true ? {color:'#2E7D32'} : {color:'#C62828'}}>
                             {this.state.student.active === true ? "Active" : "Inactive"}
@@ -150,14 +150,16 @@ class Student extends React.Component {
                             </Table>
                         </Paper>
                     </div>
-                </MuiThemeProvider>
+                </DocumentTitle>
             );
         }
         else {
             return (
-                <div className="students flex flex-column align-center">
-                    <p>Sign in to view this page.</p>
-                </div>
+                <DocumentTitle title="Library | Student">
+                    <div className="students flex flex-column align-center">
+                        <p>Sign in to view this page.</p>
+                    </div>
+                </DocumentTitle>
             );
         }
     }

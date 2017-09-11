@@ -1,22 +1,14 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class Footer extends React.Component {
 
     render() {
 
         return (
-            <MuiThemeProvider>
-                <div className="footer">
-                    <div className="horiz-rule"></div>
-                    <div>
-                        Built by <a href="http://www.brianhamilton.me" target="_blank">Brian Hamilton</a> with <a href="https://nodejs.org/en/" target="_blank">Node.js</a> and <a href="http://facebook.github.io/react/" target="_blank">React</a>
-                    </div>
-                    <div>
-                        View source code on <a href="https://github.com/hmltnbrn/classroom-library" target="_blank">GitHub</a>
-                    </div>
-                </div>
-            </MuiThemeProvider>
+            <div className="footer">
+                <p className="footer-built">Brian Hamilton © 2016-2017</p>
+                <p className="footer-photo">View source code on <a href="https://github.com/hmltnbrn/classroom-library" target="_blank">GitHub</a></p>
+            </div>
         );
     }
 };

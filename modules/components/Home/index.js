@@ -1,5 +1,5 @@
 import React from 'react';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import DocumentTitle from 'react-document-title';
 
 import SearchBar from './../SearchBar';
 import Paginator from './../Paginator';
@@ -75,7 +75,7 @@ class Home extends React.Component {
     render() {
 
         return (
-            <MuiThemeProvider>
+            <DocumentTitle title="Library | Home">
                 <div className="home">
                     <div className="flex flex-column">
                         <SearchBar searchKey={this.state.searchKey} onChange={this.searchKeyChangeHandler.bind(this)} hintText={"Enter a partial title, author, or genre"}/>
@@ -86,7 +86,7 @@ class Home extends React.Component {
                         <Paginator page={this.state.page} pageSize={this.state.pageSize} total={this.state.total} onPrevious={this.prevPageHandler.bind(this)} onNext={this.nextPageHandler.bind(this)} showTotals={false}/>
                     </div>
                 </div>
-            </MuiThemeProvider>
+            </DocumentTitle>
         );
     }
 };
