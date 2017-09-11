@@ -95,28 +95,21 @@ app.all('*', function (req, res, next) {
 app.get('/books', library.findAllBooks);
 app.get('/books/titles', library.findAllBookTitles);
 app.get('/books/:id', library.findBookById);
-app.post('/students', library.findAllStudents);
-app.post('/student', library.findStudentById);
-app.post('/student/history', library.findStudentHistoryById);
-app.post('/checkedout/book/students', library.findStudentsByBook);
-app.post('/checkedout/books/students', library.findStudentsByAllBooks);
-app.post('/book/checkout', library.checkOutBook);
-app.post('/book/checkin', library.checkInBook);
-app.post('/user/register', library.register);
-app.post('/user/changepassword', library.changePassword);
-app.post('/book/add', library.addBook);
-app.post('/book/update', library.updateBook);
-app.post('/student/add', library.addStudent);
-app.post('/student/update', library.updateStudent);
+app.post('/students', isLoggedIn, library.findAllStudents);
+app.post('/student', isLoggedIn, library.findStudentById);
+app.post('/student/history', isLoggedIn, library.findStudentHistoryById);
+app.post('/checkedout/book/students', isLoggedIn, library.findStudentsByBook);
+app.post('/checkedout/books/students', isLoggedIn, library.findStudentsByAllBooks);
+app.post('/book/checkout', isLoggedIn, library.checkOutBook);
+app.post('/book/checkin', isLoggedIn, library.checkInBook);
+app.post('/user/register', isLoggedIn, library.register);
+app.post('/user/changepassword', isLoggedIn, library.changePassword);
+app.post('/book/add', isLoggedIn, library.addBook);
+app.post('/book/update', isLoggedIn, library.updateBook);
+app.post('/student/add', isLoggedIn, library.addStudent);
+app.post('/student/update', isLoggedIn, library.updateStudent);
 
-function isLoggedIn(req, res, next) { //checks authentication status
-    if (req.isAuthenticated())
-        return next();
-
-    return res.json({status: false, admin: false, username: ""});
-}
-
-app.post('/user/signin', function (req, res, next) {
+app.post('/user/signin', isNotLoggedIn, function (req, res, next) {
     passport.authenticate('local', {session: true}, function(err, user, info) {
         if (err) { return res.json({status: "Unknown Error -- Contact Website Owner"}); }
         if (!user) { return res.json({status: "Incorrect username or password"}); }
@@ -127,18 +120,39 @@ app.post('/user/signin', function (req, res, next) {
     })(req, res, next);
 });
 
-app.post('/user/signout', function (req, res, next){
+app.post('/user/signout', isLoggedIn, function (req, res, next){
     req.logout();
     return res.json({status: false});
 });
 
-app.post('/user/session', isLoggedIn, function (req, res, next) {
+app.post('/user/session', checkSession, function (req, res, next) {
     return res.json({status: true, admin: req.user.admin, username: req.user.username});
 });
 
 app.get('*', function (req, res, next) {
     res.sendFile(path.join(__dirname, 'www', 'index.html'));
 });
+
+function isLoggedIn(req, res, next) { //checks authentication status
+    if (req.isAuthenticated())
+        return next();
+
+    return res.json({status: false, message: "Not Authorized"});
+}
+
+function isNotLoggedIn(req, res, next) { //checks non-authentication status
+    if (!req.isAuthenticated())
+        return next();
+
+    return res.json({status: false, message: "Not Authorized"});
+}
+
+function checkSession(req, res, next) { //checks session status
+    if (req.isAuthenticated())
+        return next();
+
+    return res.json({status: false, admin: false, username: ""});
+}
 
 app.listen(app.get('port'), function () {
     console.log('Express server listening on port ' + app.get('port'));
