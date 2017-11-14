@@ -14,6 +14,10 @@ let express = require('express'),
     crypto = require('crypto'),
     app = express();
 
+require('dotenv-safe').load({
+    allowEmptyValues: true
+});
+
 app.set('port', process.env.PORT || 8080); //sets port
 
 if (process.env.NODE_ENV === 'production') {

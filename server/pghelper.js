@@ -10,22 +10,26 @@ exports.query = function (sql, values, singleItem, dontLog) {
         console.log(sql, values);
     }
 
+    const client = new pg.Client({
+        connectionString: databaseURL
+    });
+
     return new Promise((resolve, reject) => {
 
-        pg.connect(databaseURL, function (err, conn, done) {
+        client.connect((err) => {
             if (err) { return reject(err); }
             try {
-                conn.query(sql, values, function (err, result) {
-                    done();
+                client.query(sql, values, function (err, result) {
                     if (err) {
                         reject(err);
                     } else {
+                        client.end();
                         resolve(singleItem ? result.rows[0] : result.rows);
                     }
                 });
             }
             catch (e) {
-                done();
+                client.end();
                 reject(e);
             }
         });
